@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#41345d">
+  <title>Florescer · EmpatIA × Doxa</title>
+  <style>
+    :root{--ink:#302c3c;--muted:#777182;--purple:#68528c;--deep:#41345d;--lav:#ede7f5;--paper:#f8f7fa;--line:#e8e4ed;--green:#417a67;--sage:#e8f2ed;--orange:#95632d;--cream:#fcf2e4;--white:#fff;--radius:20px;--shadow:0 10px 40px #31234408}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 "Segoe UI",Arial,sans-serif}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #9777c6;outline-offset:3px}button{color:inherit}a{color:var(--purple)}h1,h2,h3,p{margin:0}h1{font-size:34px;line-height:1.25;font-weight:650;letter-spacing:-1.1px}h2{font-size:21px;line-height:1.4;font-weight:650;letter-spacing:-.4px}h3{font-size:16px;line-height:1.45}small,.small{font-size:12px}.muted{color:var(--muted)}.eyebrow{font-size:11px;letter-spacing:1.8px;font-weight:700;text-transform:uppercase}.icon{width:21px;height:21px;display:inline-block;vertical-align:middle;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.icon-lg{width:29px;height:29px}
+    .app{display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:#fff;border-right:1px solid var(--line);padding:36px 22px 22px;display:flex;flex-direction:column;z-index:5}.brand{display:flex;gap:11px;align-items:center;padding:0 13px}.brandmark{background:var(--deep);color:#fff;border-radius:13px;width:42px;height:42px;display:grid;place-items:center}.brand strong{font-size:24px;letter-spacing:-1px;font-weight:650}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.8px;margin-top:-3px}.nav-label{margin:42px 14px 12px;color:#a19aa9;font-size:10px;font-weight:700;letter-spacing:1.6px}.nav-label.second{margin-top:30px}.nav{display:flex;flex-direction:column;gap:7px}.nav button{display:flex;align-items:center;gap:13px;width:100%;border:0;background:none;text-align:left;padding:12px 14px;border-radius:11px;color:#7a7385;font-size:13px;font-weight:550}.nav button:hover{background:#f8f5fb;color:var(--deep)}.nav button.active{background:var(--lav);color:var(--deep)}.nav button.active:after{content:"";margin-left:auto;background:var(--purple);width:5px;height:5px;border-radius:100%}.sidebar-bottom{margin-top:auto;padding-top:24px}.sidebar-note{margin:10px 8px 20px;font-size:11px;color:#91899b;display:flex;align-items:flex-start;gap:9px}.profile{border-top:1px solid var(--line);padding:22px 8px 0;display:flex;gap:11px;align-items:center}.avatar{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:#e8e0ef;color:var(--purple);font-weight:650;font-size:13px;flex-shrink:0}.profile strong{font-size:12px;display:block}.profile small{font-size:10px;color:var(--muted)}
+    .topbar{height:80px;padding:0 46px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#ffffffa8;gap:12px}.breadcrumb{font-size:12px;color:var(--muted)}.breadcrumb span{margin:0 10px;color:#c5becd}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:30px;padding:5px 10px;font-size:10px;font-weight:650;white-space:nowrap;line-height:1.5}.badge:has(.dot){padding:6px 12px}.dot{width:6px;height:6px;background:currentColor;border-radius:50%}.badge.purple{background:var(--lav);color:var(--purple)}.badge.green{background:var(--sage);color:var(--green)}.badge.orange{background:var(--cream);color:var(--orange)}.badge.gray{background:#f0eef3;color:var(--muted)}main{max-width:1410px;margin:auto;padding:36px 46px 24px}.page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px;gap:16px}.page-head p{margin-top:9px;color:var(--muted);font-size:13px}.button{border:0;border-radius:10px;background:var(--purple);color:white;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:650;padding:12px 18px;text-decoration:none;line-height:1.5}.button:hover{background:var(--deep)}.button.light{background:white;color:var(--purple);border:1px solid var(--line)}.button.light:hover{background:var(--lav)}.button.ghost{color:var(--purple);background:transparent;padding:7px 0}.button.ghost:hover{color:var(--deep)}.button.danger{background:#fff0ee;color:#9e4135}.button.wide{width:100%}.button .icon{width:16px;height:16px}.flex{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.gap8{gap:8px}.grid{display:grid;gap:20px}.columns{grid-template-columns:minmax(0,1.65fr) minmax(265px,1fr)}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}.space{margin-top:22px}.space-sm{margin-top:12px}.section-title{font-size:17px;font-weight:650;margin-bottom:16px}.hero{position:relative;overflow:hidden;padding:32px 36px;background:var(--deep);color:white;min-height:242px;border-radius:var(--radius);display:flex;align-items:center}.hero-copy{position:relative;z-index:1;max-width:65%}.hero .eyebrow{color:#cdc0e0;margin-bottom:13px}.hero h2{font-family:Georgia,"Times New Roman",serif;font-size:35px;line-height:1.18;font-weight:400;letter-spacing:-.8px}.hero p{color:#d5cce0;font-size:12px;line-height:1.8;margin:15px 0 20px;max-width:355px}.hero .button{background:#f0e9f8;color:var(--deep)}.botanical{position:absolute;right:6px;bottom:-12px;width:260px;height:270px;opacity:.88}.progress-card{display:flex;flex-direction:column;justify-content:space-between}.progress-number{font-size:39px;font-weight:600;letter-spacing:-1.5px;line-height:1.3}.progress-number span{font-size:17px;color:#a29baa;font-weight:400;letter-spacing:0}.segments{display:flex;gap:6px;margin:17px 0 10px}.segments span{height:7px;flex:1;background:#eeeaf3;border-radius:6px}.segments .done{background:#9e89ba}.segments .current{background:var(--purple)}.milestones{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.progress-card .foot{border-top:1px solid var(--line);padding-top:15px;margin-top:20px;font-size:11px;color:var(--muted);display:flex;gap:9px}.progress-card .foot .icon{color:var(--green);width:17px;height:17px}
+    .stat-card{padding:18px 22px;display:flex;align-items:center;gap:14px}.icon-tile{background:var(--lav);color:var(--purple);border-radius:12px;width:44px;height:44px;display:grid;place-items:center;flex-shrink:0}.icon-tile.green{background:var(--sage);color:var(--green)}.icon-tile.orange{background:var(--cream);color:var(--orange)}.stat-card small{display:block;color:var(--muted);font-size:11px}.stat-card strong{font-size:15px;font-weight:600}.section-row{display:flex;justify-content:space-between;align-items:center;margin:29px 0 15px}.section-row h2{font-size:18px}.episode-preview{display:grid;grid-template-columns:185px 1fr;gap:23px;margin-top:20px}.video-art{min-height:145px;border-radius:13px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(130deg,#d9d4c9,#aea994);color:white}.video-art:before{content:"";position:absolute;width:135px;height:135px;border:1px solid #fff8;border-radius:50%;transform:translate(50px,60px)}.video-art:after{content:"";position:absolute;width:160px;height:160px;border:1px solid #fff5;border-radius:50%;transform:translate(50px,60px)}.play{width:44px;height:44px;background:#ffffffd9;color:#766c60;border-radius:50%;display:grid;place-items:center;z-index:1}.video-tag{position:absolute;bottom:11px;left:11px;z-index:1;letter-spacing:1px;font-size:8px}.episode-copy h3{margin:9px 0}.episode-copy p{font-size:12px;color:var(--muted);margin-bottom:15px}.pathway{display:flex;align-items:center;gap:7px;font-size:9px;color:#948a9f;margin-top:18px;flex-wrap:wrap}.pathway span{width:3px;height:3px;border-radius:50%;background:#b8adca}.care-card{background:#f0f5f1;border-color:#e1e9e3;display:flex;flex-direction:column;justify-content:space-between}.care-card h3{font-size:20px;font-family:Georgia,serif;font-weight:400;margin:13px 0 10px}.care-card p{color:#6b7b71;font-size:12px}.care-card .button{color:var(--green);align-self:flex-start;margin-top:17px}.care-card .icon{color:var(--green)}.journey-strip{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-top:18px}.week-chip{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 8px;text-align:center;min-height:90px;color:var(--muted);font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.week-chip .week-dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f2eff6;font-size:10px}.week-chip.done{background:#f4f8f5;border-color:#e4ece5;color:var(--green)}.week-chip.done .week-dot{background:#dfece3}.week-chip.next{background:#f3eef9;border-color:#d5c6e7;color:var(--purple)}.week-chip.next .week-dot{background:var(--purple);color:white}.week-chip .icon{width:13px;height:13px}.page-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:23px 0 0;margin-top:24px;border-top:1px solid var(--line);font-size:10px;color:#9a92a3}.page-footer button{font-size:10px}
+    .notice{border:1px solid #e8ddca;background:#fff9ef;color:#826635;border-radius:12px;padding:13px 16px;font-size:12px;margin-bottom:20px}.notice.green{background:#f0f6f2;border-color:#dce9df;color:#52705e}.notice.purple{background:#f3eff8;border-color:#e2d9ed;color:#75618d}.notice p+p{margin-top:7px}.form-card{max-width:760px;margin:0 auto}.form-card h2{margin-bottom:9px}.form-card>.muted{font-size:13px}.form-field{margin:22px 0}.form-field>label,.field-label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}input[type=text],input[type=url],textarea,select{width:100%;background:#fff;border:1px solid #dcd5e4;border-radius:9px;padding:11px 12px;color:var(--ink);font-size:13px}textarea{resize:vertical;min-height:100px}input::placeholder,textarea::placeholder{color:#aaa2b2}.option-list{display:grid;gap:10px;margin:20px 0}.option{display:flex;gap:11px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:14px 16px;cursor:pointer;font-size:13px;background:#fff}.option:hover{background:#f8f5fc;border-color:#cbbadc}.option:has(input:checked){background:var(--lav);border-color:#b8a0d4;color:var(--deep)}input[type=radio],input[type=checkbox]{accent-color:var(--purple);width:16px;height:16px;flex-shrink:0}.option input{margin:0}.form-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}.form-steps{display:flex;gap:6px;margin:20px 0 29px}.form-steps span{height:5px;background:#ece7f1;border-radius:8px;flex:1}.form-steps span.filled{background:#9780b4}.step-counter{color:var(--purple);font-size:11px;font-weight:650}.error{color:#a73535;font-size:12px;margin-top:10px;min-height:0}.error:empty{display:none}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.check-grid .option{margin:0;padding:10px;font-size:12px}.video-placeholder{background:linear-gradient(135deg,#e9e4ed,#f2eee7);border-radius:14px;padding:35px 20px;text-align:center;margin:22px 0;color:var(--purple)}.video-placeholder .play{margin:0 auto 15px;background:white}.video-placeholder h3{margin:5px 0}.video-placeholder p{font-size:12px}.mood-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:23px 0}.mood{display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid var(--line);border-radius:14px;background:white;cursor:pointer;padding:18px 6px;gap:12px;font-size:11px}.mood:has(input:checked){background:var(--sage);border-color:#7c9f8b}.mood input{width:13px;height:13px}.mood-face{width:37px;height:37px;border-radius:50%;display:grid;place-items:center;background:#edf2e8;color:#6b8260;font-size:23px;font-family:Arial,sans-serif}.mood:nth-child(3) .mood-face{background:#faf0d7;color:#9b8956}.mood:nth-child(4) .mood-face,.mood:nth-child(5) .mood-face{background:#f5e5e0;color:#a77b72}.quote{font-family:Georgia,serif;font-size:26px;line-height:1.5;color:var(--deep);margin:18px 0}.report-flower{width:72px;height:72px;display:grid;place-items:center;border-radius:22px;background:#efe8f6;color:var(--purple);margin-bottom:23px}.report-flower .icon{width:37px;height:37px}.evidence{padding:15px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start;font-size:13px}.evidence:last-child{border:0}.evidence .icon{width:18px;height:18px;color:var(--green);margin-top:2px}.divider{height:1px;background:var(--line);margin:24px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}th{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:600;padding:14px 12px;background:#faf9fc}td{padding:17px 12px;border-bottom:1px solid var(--line)}tbody tr:last-child td{border-bottom:0}td .avatar{width:31px;height:31px;font-size:11px}td strong{font-size:12px}.bar-row{display:grid;grid-template-columns:125px 1fr 30px;gap:10px;align-items:center;margin:13px 0;font-size:11px}.bar{height:7px;background:#eeeaf3;border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;border-radius:10px;background:#a28bba}.care-summary .bar i{background:#8da896}.role-tile{border:1px solid var(--line);border-radius:13px;padding:16px}.role-tile h3{font-size:13px}.role-tile p{font-size:11px;color:var(--muted);margin-top:7px}.inline-link{border:0;background:none;color:var(--purple);padding:0;text-decoration:underline;font-size:12px}.episode-edit{padding:20px 0;border-bottom:1px solid var(--line)}.episode-edit:first-of-type{padding-top:0}.episode-edit:last-of-type{border-bottom:0}.episode-edit label{font-size:11px;font-weight:600;display:block;margin:11px 0 5px}.episode-edit h3{font-size:13px}.episode-edit .grid{gap:12px}.empty{text-align:center;padding:45px 20px}.empty .icon-tile{margin:0 auto 20px}.empty p{color:var(--muted);font-size:13px;margin:10px auto 23px;max-width:420px}
+    dialog{border:1px solid var(--line);border-radius:20px;padding:28px;max-width:620px;width:calc(100% - 32px);max-height:85vh;color:var(--ink);box-shadow:0 20px 100px #302c3c33}dialog::backdrop{background:#21162f66;backdrop-filter:blur(3px)}dialog h2{margin-bottom:15px}dialog p{font-size:13px;margin:12px 0}dialog ul{padding-left:20px;font-size:13px}dialog li{margin:8px 0}.modal-close{margin-top:20px;display:flex;justify-content:flex-end;gap:10px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--deep);color:#fff;padding:13px 20px;border-radius:12px;font-size:12px;box-shadow:0 8px 30px #302c3c30;z-index:20;max-width:90vw}.toast:empty{display:none}#storage-warning{margin:16px 46px 0}.skip-link{position:fixed;left:12px;top:-100px;z-index:100;background:white;padding:10px}.skip-link:focus{top:12px}.mobile-brand{display:none}
+    @media(min-width:1500px){main{padding-top:44px}.hero{min-height:265px}.hero h2{font-size:39px}.botanical{right:25px}}
+    @media(max-width:1150px){.app{grid-template-columns:210px minmax(0,1fr)}.sidebar{padding:28px 14px 18px}.topbar{padding:0 28px}main{padding:28px}.hero{padding:28px}.hero h2{font-size:31px}.hero-copy{max-width:75%}.botanical{right:-55px;opacity:.55}.columns{grid-template-columns:minmax(0,1.4fr) minmax(240px,1fr)}.episode-preview{grid-template-columns:120px 1fr;gap:15px}.journey-strip{gap:6px}.stat-card{padding:16px 13px;gap:10px}.stat-card strong{font-size:13px}}
+    @media(max-width:900px){.app{grid-template-columns:185px minmax(0,1fr)}.brand{padding:0 6px;gap:8px}.brand strong{font-size:22px}.brandmark{width:35px;height:35px}.nav button{padding:11px 10px;font-size:12px;gap:9px}.columns{grid-template-columns:1fr}.progress-card{display:block}.three{grid-template-columns:1fr}.stat-card{padding:15px 20px}.hero-copy{max-width:70%}.botanical{right:10px;opacity:.8}.care-card{min-height:200px}.journey-strip{grid-template-columns:repeat(4,1fr)}h1{font-size:29px}.page-head{align-items:flex-start}.page-head>.button{white-space:nowrap;padding:9px 11px}.two{grid-template-columns:1fr}.mood-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:620px){.app{display:block}.sidebar{position:relative;height:auto;padding:17px 18px 10px;border-bottom:1px solid var(--line);border-right:0}.brand{padding:0 2px}.brand small{font-size:8px}.sidebar>.brand{margin-bottom:16px}.nav-label,.sidebar-bottom{display:none}.nav{flex-direction:row;gap:4px;overflow-x:auto;padding-bottom:4px}.nav button{width:auto;flex-shrink:0;font-size:11px;padding:9px;gap:6px}.nav button .icon{width:16px;height:16px}.nav button.active:after{display:none}.nav.admin{margin-top:3px}.nav.admin:before{content:"Demo pastor";font-size:9px;white-space:nowrap;align-self:center;color:#a198ac;margin-right:8px}.nav.admin button{padding:5px 9px;font-size:10px}.topbar{height:52px;padding:0 20px}.breadcrumb{font-size:10px}.topbar>.badge{font-size:8px;padding:5px 8px}main{padding:24px 18px}.page-head{margin-bottom:20px;flex-wrap:wrap}.page-head h1{font-size:28px}.page-head p{font-size:12px}.hero{padding:27px 24px;min-height:268px}.hero h2{font-size:32px}.hero-copy{max-width:82%}.hero p{max-width:230px}.botanical{right:-60px;opacity:.45}.card{padding:20px}.episode-preview{grid-template-columns:1fr}.video-art{min-height:155px}.three{gap:10px}.stat-card{padding:14px 19px}.section-row h2{font-size:16px}.section-row>.button{font-size:10px}.journey-strip{gap:8px}.week-chip{min-height:80px}.page-footer{align-items:flex-start;flex-direction:column}.check-grid{grid-template-columns:1fr}.mood-grid{grid-template-columns:repeat(2,1fr)}.mood:last-child{grid-column:span 2}.form-actions{align-items:stretch}.form-actions .button{padding:11px 14px}.quote{font-size:23px}#storage-warning{margin:16px 18px 0}.bar-row{grid-template-columns:95px 1fr 25px}.episode-edit .grid{grid-template-columns:1fr}}
+    .method-layout{display:grid;grid-template-columns:220px minmax(0,1fr);align-items:start;gap:20px}
+    .method-toc{position:sticky;top:24px;padding:20px}
+    .method-toc h2{font-size:13px;margin:0 0 12px}
+    .method-toc-mobile{display:none}
+    .method-toc-mobile summary{cursor:pointer;font-size:13px;font-weight:650}
+    .method-toc-mobile nav{margin-top:12px}
+    .method-toc a{display:block;padding:7px 0;color:var(--muted);font-size:11px;line-height:1.45;text-decoration:none}
+    .method-toc a:hover{color:var(--purple);text-decoration:underline}
+    .method-body{min-width:0;font-size:14px;line-height:1.75}
+    .method-body h2{font-size:20px;margin:36px 0 12px;scroll-margin-top:24px}
+    .method-body p{margin:0 0 15px}
+    .method-body blockquote{margin:0;padding:16px 18px;border-left:4px solid #b7a4cc;border-radius:8px;background:#f3eff8;color:var(--deep)}
+    .method-body blockquote p{margin:0}
+    .method-body ul{padding-left:22px;margin:8px 0 20px}
+    .method-body li{margin:8px 0}
+    .method-body a{overflow-wrap:anywhere}
+    .method-body table{min-width:520px;margin:8px 0 20px}
+    .method-body td{vertical-align:top;padding:13px 12px}
+    .episode-edit>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:650;list-style:none}
+    .episode-edit>summary::-webkit-details-marker{display:none}
+    .episode-edit>summary:before{content:"+";display:grid;place-items:center;width:25px;height:25px;flex-shrink:0;border-radius:8px;background:var(--lav);color:var(--purple)}
+    .episode-edit[open]>summary:before{content:"−"}
+    .episode-edit>summary .episode-heading{flex:1}
+    .episode-context{margin:18px 0 12px;padding:14px 16px;border:1px solid var(--line);border-radius:11px;background:#faf9fc}
+    .episode-context p{font-size:12px;margin:7px 0;overflow-wrap:anywhere}
+    .episode-edit textarea{min-height:110px}
+    .episode-edit .field-note{font-size:11px;color:var(--muted);margin:7px 0 12px}
+    .episode-edit .ai-result{margin:12px 0}
+    .episode-edit .ai-result:empty{display:none}
+    .episode-edit .ai-result .notice{margin:0}
+    @media(max-width:900px){.method-layout{grid-template-columns:minmax(0,1fr)}.method-toc{position:static}.method-toc-desktop{display:none}.method-toc-mobile{display:block}.method-toc nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}}
+    @media(max-width:620px){.method-toc nav{grid-template-columns:minmax(0,1fr)}.method-body{font-size:13px}}
+    @media(prefers-reduced-motion:no-preference){.button,.nav button,.option{transition:background .15s,border-color .15s}main{animation:appear .24s ease}@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}}
+    .chat-mode{--chat-green:#176b56;--chat-soft:#d9f6d0;--chat-ink:#263d36}
+    .chat-main{max-width:1530px;padding:24px 30px 16px}.chat-intro{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px}.chat-intro h1{font-size:23px;letter-spacing:-.6px}.chat-intro p{font-size:12px;color:var(--muted);margin-top:4px}
+    .chat-shell{display:grid;grid-template-columns:235px minmax(0,1fr);height:calc(100dvh - 225px);min-height:570px;max-height:900px;background:white;border:1px solid #dae4de;border-radius:20px;overflow:hidden;box-shadow:0 12px 45px #294b3610}
+    .chat-rail{background:#fff;border-right:1px solid #dde5e0;display:flex;flex-direction:column;padding:23px 15px;min-width:0}.chat-rail h2{font-size:18px;margin:0 10px 19px}.chat-contact{border:0;background:#edf5ef;border-radius:12px;padding:14px 10px;display:flex;align-items:center;gap:10px;text-align:left;width:100%;margin-bottom:8px}.chat-contact.secondary{background:transparent}.chat-contact:hover{background:#e5f0e9}.chat-contact strong{display:block;font-size:12px;color:#2c4b3b}.chat-contact small{display:block;font-size:10px;color:#7a8a80;margin-top:3px}.chat-avatar{display:grid;place-items:center;width:39px;height:39px;border-radius:50%;background:#c9e8d6;color:#296348;flex-shrink:0}.chat-avatar .icon{width:24px;height:24px}.chat-rail-progress{padding:22px 10px;margin-top:15px;border-top:1px solid #e8eee9}.chat-rail-progress h3{font-size:12px}.chat-rail-progress p{font-size:11px;color:#819086;margin-top:7px}.chat-rail-progress .segments span.done{background:#7aaf8f}.chat-rail-progress .segments span.current{background:#247457}.chat-rail .button.ghost{color:var(--chat-green);font-size:11px}.chat-rail-note{margin-top:auto;padding:17px 10px 0;color:#7b887e;font-size:10px;line-height:1.7}.chat-rail-note .icon{width:15px;height:15px;margin-bottom:6px;display:block}.chat-pane{display:flex;flex-direction:column;min-width:0;min-height:0}.chat-header{background:#f7faf8;padding:15px 22px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #dae4de;flex-shrink:0}.chat-header .chat-avatar{width:43px;height:43px;background:#1f755a;color:white}.chat-header h2{font-size:15px;letter-spacing:-.2px}.chat-header p{font-size:10px;color:#7b8e82}.chat-header-actions{display:flex;align-items:center;gap:5px;margin-left:auto}.chat-icon-button{border:0;width:36px;height:36px;border-radius:50%;background:transparent;color:#688273;display:grid;place-items:center}.chat-icon-button:hover{background:#e4eee6}.chat-icon-button .icon{width:19px;height:19px}
+    .chat-thread{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px 28px;background-color:#f0ede6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%237e927d' stroke-opacity='.09' stroke-width='1.5'%3E%3Cpath d='M25 42c-8-22 6-29 21-27 0 19-9 29-21 27zm0 0 13-18M120 133c-8-22 6-29 21-27 0 19-9 29-21 27zm0 0 13-18M113 36c-12-17-23 0 0 15 23-15 12-32 0-15M38 115v12m-6-6h12M151 77v8m-4-4h8'/%3E%3Ccircle cx='78' cy='75' r='8'/%3E%3Ccircle cx='61' cy='164' r='3'/%3E%3C/g%3E%3C/svg%3E")}
+    .chat-system{display:table;margin:0 auto 17px;padding:7px 13px;border-radius:9px;background:#fff9e6;color:#7d765b;font-size:10px;line-height:1.6;text-align:center;max-width:93%;box-shadow:0 1px 2px #294b3610}.chat-day{display:table;margin:20px auto 16px;padding:5px 12px;border-radius:8px;background:#ffffffd9;color:#7c8980;font-size:10px}.chat-bubble{position:relative;background:#fff;max-width:85%;width:fit-content;padding:12px 15px 7px;border-radius:0 12px 12px 12px;margin:0 0 12px;box-shadow:0 1px 2px #293e3314;color:var(--chat-ink);font-size:13px;line-height:1.65;overflow-wrap:anywhere;white-space:normal}.chat-bubble:before{content:"";position:absolute;top:0;left:-7px;border-style:solid;border-width:0 8px 8px 0;border-color:transparent #fff transparent transparent}.chat-bubble.out{background:var(--chat-soft);margin-left:auto;border-radius:12px 0 12px 12px}.chat-bubble.out:before{left:auto;right:-7px;border-width:0 0 8px 8px;border-color:transparent transparent transparent var(--chat-soft)}.chat-meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:9px;color:#8c9a90;margin-top:6px;line-height:1.5}.chat-meta .icon{width:13px;height:13px;color:#669d83}.chat-author{font-size:10px;font-weight:700;color:#318362;margin-bottom:5px;letter-spacing:.3px}.chat-bubble p+p{margin-top:10px}.chat-bubble .evidence{font-size:12px;border-color:#e8ede8}.chat-bubble .quote{font-size:23px;color:#276548;margin:8px 0 14px}.chat-buttons{display:flex;flex-direction:column;margin:12px -15px -7px;border-top:1px solid #e4ede7;overflow:hidden;border-radius:0 0 12px 12px}.chat-reply{background:white;border:0;border-bottom:1px solid #e4ede7;padding:11px 15px;color:#197453;font-size:12px;min-height:43px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600}.chat-reply:last-child{border-bottom:0}.chat-reply:hover{background:#eff8f1}.chat-reply .icon{width:16px;height:16px}.chat-reply.secondary{color:#7d8981;font-weight:400}.chat-caption{display:block;font-size:10px;color:#8b958d;margin-top:9px;line-height:1.6}.chat-video{width:320px;max-width:100%;background:#e8eee7;border-radius:8px;overflow:hidden;margin:5px 0 10px}.chat-video-art{height:128px;position:relative;display:grid;place-items:center;background:linear-gradient(130deg,#d9e3ce,#7c987d);overflow:hidden}.chat-video-art:before,.chat-video-art:after{content:"";position:absolute;right:5px;bottom:-80px;width:230px;height:230px;border:1px solid #ffffff50;border-radius:50%}.chat-video-art:after{width:170px;height:170px;right:35px;bottom:-50px}.chat-video-art .play{color:#376549;background:#ffffffda;width:42px;height:42px}.chat-video-art>small{position:absolute;left:13px;top:11px;font-size:9px;letter-spacing:1.5px;color:#fff}.chat-video-info{padding:12px;color:#355440}.chat-video-info strong{font-size:12px;display:block}.chat-video-info small{font-size:10px;color:#738774}.chat-video-link{display:block;text-decoration:none}.chat-history-button{display:block;margin:0 auto 18px;background:#ffffffdb;border:1px solid #e1e7df;color:#6b8572;border-radius:18px;font-size:10px;padding:6px 13px}.chat-active{scroll-margin:20px}.chat-active .chat-bubble{min-width:min(310px,85%)}.chat-compose-wrap{background:#f8faf8;border-top:1px solid #dfe7df;padding:12px 17px 9px;flex-shrink:0}.chat-compose{display:flex;align-items:center;gap:10px}.chat-compose textarea{min-height:44px;height:44px;max-height:110px;resize:vertical;border:1px solid #dfe8df;border-radius:14px;background:white;padding:11px 14px;color:#324d3b;font-size:12px;line-height:20px}.chat-compose textarea:disabled{background:#f0f3f0;color:#87948b;opacity:1}.chat-send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:#287b59;color:white;display:grid;place-items:center}.chat-send:hover{background:#145e43}.chat-send .icon{width:19px;height:19px}.chat-send:disabled{background:#b4c6b8;opacity:.65}.chat-compose-hint{margin:7px 0 0 2px;color:#8a978d;font-size:9px;line-height:1.5}.chat-back{display:block;border:0;background:#ffffffb8;border-radius:15px;color:#77887c;font-size:10px;padding:5px 11px;margin:0 0 12px}.chat-list .option{border-color:#e2e9e2;font-size:13px}.chat-list .option:has(input:checked){background:#e9f4e9;border-color:#80aa8d;color:#2e6242}.chat-list input{accent-color:#287b59}.chat-list .button{background:#287b59}.chat-list .field-label{font-size:12px}.chat-list .option-list{margin:16px 0}.chat-list .multi-hint{color:#7c8e81;font-size:11px}.chat-list .modal-close{margin-top:0}.chat-mode .page-footer{padding-top:13px;margin-top:14px}.chat-mode .nav button.active{background:#e7f2e9;color:#34674b}.chat-mode .nav button.active:after{background:#468c64}.chat-mode .badge.green{background:#e5f0e8;color:#55715e}.chat-mode main{animation:none}
+    @media(max-width:1250px){.chat-shell{grid-template-columns:1fr}.chat-rail{display:none}.chat-main{padding:22px 25px 16px}.chat-thread{padding:22px 25px}.chat-bubble{max-width:88%}}
+    @media(max-width:620px){.chat-mode .sidebar{padding:12px 15px 7px}.chat-mode .sidebar>.brand{margin-bottom:9px}.chat-mode .brandmark{width:29px;height:29px;border-radius:9px}.chat-mode .brandmark .icon{width:19px;height:19px}.chat-mode .brand strong{font-size:21px}.chat-mode .brand small{font-size:7px}.chat-mode .nav button{font-size:10px;padding:7px 8px;gap:5px}.chat-mode .nav{gap:3px;padding-bottom:0}.chat-mode .nav.admin{margin-top:4px}.chat-mode .nav.admin button{padding:3px 8px;font-size:9px}.chat-mode .topbar{display:none}.chat-main{padding:10px 10px 12px}.chat-intro{display:none}.chat-shell{border-radius:14px;height:calc(100dvh - 168px);min-height:475px;max-height:none}.chat-header{padding:12px 13px;gap:9px}.chat-header .chat-avatar{width:35px;height:35px}.chat-header h2{font-size:13px}.chat-header p{font-size:9px}.chat-header-actions{gap:0}.chat-icon-button{width:29px;height:33px}.chat-thread{padding:17px 16px}.chat-bubble{font-size:12px;padding:11px 13px 6px;max-width:90%;margin-bottom:12px}.chat-buttons{margin:11px -13px -6px}.chat-reply{font-size:12px;padding:12px}.chat-system{font-size:9px;max-width:100%;padding:7px 10px;margin-bottom:14px}.chat-day{font-size:9px}.chat-compose-wrap{padding:10px 10px 7px}.chat-compose{gap:8px}.chat-compose textarea{font-size:12px;padding:10px 11px}.chat-compose-hint{font-size:8px}.chat-meta{font-size:8px}.chat-active .chat-bubble{min-width:85%}.chat-video-art{height:110px}.chat-mode .page-footer{padding:0 8px;border:0;gap:3px;margin-top:11px}.chat-mode .page-footer>span{display:none}.chat-mode .page-footer .button{font-size:9px}.chat-mode .page-footer .flex{width:100%;justify-content:center;gap:22px}.chat-list{padding:22px}.chat-list .option{font-size:12px;padding:12px}}
+    @media print{.sidebar,.topbar,.page-footer,.button,.notice,dialog,.toast,.chat-rail,.chat-compose-wrap,.chat-header-actions,.chat-buttons,.chat-intro{display:none!important}.app{display:block}main{padding:0}.card{box-shadow:none;break-inside:avoid}body{background:white}.chat-shell{display:block;height:auto;max-height:none;border:0}.chat-thread{overflow:visible;background:#fff}.chat-bubble{break-inside:avoid;box-shadow:none;border:1px solid #ddd}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand"><div class="brandmark" data-icon="sprout"></div><div><strong>florescer</strong><small>EMPATIA × DOXA</small></div></div>
+      <div class="nav-label">MINHA CAMINHADA</div>
+      <nav class="nav" id="volunteer-nav" aria-label="Área do voluntário"></nav>
+      <div class="nav-label second">ÁREA DO PASTOR · DEMO</div>
+      <nav class="nav admin" id="pastor-nav" aria-label="Demonstração do pastor"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span data-icon="shield"></span><span>Cuidar primeiro.<br>Depois, liderar.</span></div>
+        <div class="profile"><div class="avatar">AN</div><div><strong>Ana · personagem fictícia</strong><small>Voluntária na Doxa</small></div></div>
+      </div>
+    </aside>
+    <div>
+      <header class="topbar"><div class="breadcrumb">Minha caminhada <span>/</span> <b id="crumb">Visão geral</b></div><div class="badge purple"><i class="dot"></i> Demonstração local</div></header>
+      <div id="storage-warning" class="notice" role="alert" hidden></div>
+      <main id="main" tabindex="-1"></main>
+    </div>
+  </div>
+  <dialog id="modal" aria-labelledby="modal-title"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script id="pastor-readme" type="text/plain">
+# Leia-me do pastor — fundamentação e adaptação
+
+> **Resumo:** esta é uma demonstração educativa inspirada em conceitos de DISC e CliftonStrengths, não uma aplicação oficial, diagnóstico psicológico ou instrumento validado. Os resultados são hipóteses para conversa, não decisões automáticas.
+
+## 1. Para que serve a demonstração
+
+O Florescer apresenta uma maneira de conversar com voluntários sobre como preferem contribuir, o que lhes dá energia e como está sua disponibilidade para servir. A proposta combina cuidado, reflexão e diálogo pastoral, sem reduzir uma pessoa a um rótulo.
+
+Os documentos de origem são “Bot de Liderança Doxa — o roteiro” e “EmpatIA × Doxa — cuidar e liderar”, fornecidos para este projeto. Eles propõem duas lentes e seis papéis de equipe. A implementação acrescenta regras e exemplos necessários para demonstrar o fluxo; esses acréscimos ainda precisam de revisão.
+
+## 2. A primeira lente: DISC
+
+O trabalho de William Moulton Marston, publicado em 1928, propôs uma teoria sobre expressões comportamentais que inspirou instrumentos desenvolvidos posteriormente. As versões modernas de DISC variam conforme o fornecedor; os nomes atuais não são necessariamente idênticos aos termos originais de Marston. As referências ao final explicam essa evolução.
+
+De modo geral, a linguagem contemporânea descreve quatro tendências. Os nomes abaixo são aproximações educativas, não uma descrição completa dos instrumentos comerciais:
+
+| Letra | Tendência usada no protótipo | Exemplo de contribuição |
+| --- | --- | --- |
+| D | Dominância: iniciativa, decisão e foco em resultados | Definir prioridades diante de um imprevisto |
+| I | Influência: comunicação, entusiasmo e mobilização | Aproximar e encorajar pessoas |
+| S | Estabilidade: cooperação, apoio e constância | Sustentar acordos e oferecer apoio |
+| C | Conformidade ou cautela: análise, precisão e qualidade | Examinar detalhes antes de agir |
+
+Essas tendências não definem o valor, o caráter, a fé ou a capacidade de alguém. Uma pessoa pode apresentar comportamentos diferentes conforme o contexto. A demonstração não aplica nem substitui um questionário DISC oficial e não utiliza a pontuação ou os relatórios proprietários de fornecedores.
+
+## 3. A segunda lente: Gallup e CliftonStrengths
+
+O trabalho de Don Clifton e da Gallup propõe desenvolver pessoas a partir de seus talentos. Na abordagem CliftonStrengths, talentos são padrões recorrentes que podem ser desenvolvidos por meio de prática, conhecimento e habilidades. O instrumento oficial da Gallup identifica e organiza 34 temas de talento; os quatro domínios são uma forma de agrupar temas para refletir sobre colaboração.
+
+| Domínio | Ideia geral, em nossas palavras |
+| --- | --- |
+| Execução | Transformar planos em ações e entregas |
+| Influência | Comunicar ideias e mobilizar pessoas |
+| Relacionamento | Construir vínculos e apoiar a colaboração |
+| Pensamento estratégico | Analisar informações e considerar possibilidades futuras |
+
+No protótipo, chamamos o último domínio de “Estratégico”. As perguntas de energia foram criadas para uma conversa sobre preferências de contribuição; elas não medem os 34 temas, não identificam talentos CliftonStrengths e não produzem um resultado oficial da Gallup. A associação entre uma tarefa e um domínio é uma escolha editorial da demonstração, não uma conclusão estabelecida sobre a pessoa.
+
+## 4. Como adaptamos as duas lentes
+
+A adaptação tenta observar **uma escolha de comportamento** e **uma preferência de atividade** por semana. São sinais limitados para dialogar, não medidas definitivas de personalidade ou talento.
+
+- A caminhada contém oito episódios. Cada episódio tem um dilema de estilo e uma pergunta de energia, cada um com quatro alternativas.
+- Em cada dilema de estilo, as alternativas recebem, nessa ordem, as etiquetas D, I, S e C. A escolha soma um ponto à etiqueta correspondente.
+- Em cada pergunta de energia, as alternativas recebem, nessa ordem, as etiquetas Influência, Relacionamento, Execução e Estratégico. A escolha soma um ponto à etiqueta correspondente.
+- O primeiro par de perguntas foi apresentado nos documentos de origem. Os outros sete pares são propostas escritas para este protótipo e ainda não foram validados.
+- A pergunta sobre valores é registrada, mas não soma pontos ao estilo nem à energia. A reflexão em texto e o compromisso são registrados; seu conteúdo não é analisado pela pontuação.
+- Em cada semana, o pastor pode escrever sua pergunta ou pedir uma sugestão opcional à IA com base no tema informado e nas duas perguntas fixas. A sugestão deve ser revisada e não muda os dilemas ou a pontuação.
+- O retorno do compromisso não altera os pontos de estilo ou energia, mas entra no indicador demonstrativo de confiança descrito adiante.
+
+As opções são contextuais e simplificadas. Alguém pode gostar de uma atividade por motivos diferentes da etiqueta atribuída. A semelhança de nomes não torna essas perguntas equivalentes às avaliações oficiais.
+
+## 5. Como o papel demonstrativo é calculado
+
+Antes de quatro episódios não é atribuído papel. A partir de quatro, o estilo só é considerado predominante se a categoria mais escolhida tiver pelo menos dois pontos de vantagem sobre a segunda. Para energia, exige-se uma categoria com maior contagem, exceto na regra específica de Formador.
+
+| Papel de equipe | Estilo predominante | Energia observada na demonstração |
+| --- | --- | --- |
+| Arquiteto | D ou C | Estratégico como maior contagem única |
+| Mobilizador | I | Influência como maior contagem única |
+| Sustentador | S | Relacionamento como maior contagem única |
+| Executor | D | Execução como maior contagem única |
+| Guardião | C | Execução como maior contagem única |
+| Formador | I ou S | Relacionamento e Estratégico empatados em primeiro, ambos acima dos outros dois |
+
+Os seis nomes vêm da proposta Doxa; não são categorias oficiais de DISC ou de CliftonStrengths. A regra de empate para Formador foi definida para esta demonstração porque a proposta original não especificava todos os critérios de empate.
+
+Sem vantagem suficiente no estilo, com empate de energia fora dessa exceção, ou quando a combinação não está na tabela, o resultado é **perfil misto**. Isso não significa ausência de talentos. A vantagem de dois pontos é uma regra editorial do protótipo, não um corte psicométrico validado.
+
+## 6. Marcos, confiança e carga
+
+As devolutivas são exibidas após quatro e oito episódios. Entre o quinto e o sétimo, o relatório continua usando os primeiros quatro; ao chegar ao oitavo, usa os oito. O indicador de carga considera os check-ins de liderança mais recentes, mesmo entre os marcos.
+
+No cálculo demonstrativo, a confiança é “média” com quatro ou cinco respostas. De seis a oito respostas, ela passa a “alta” somente quando mais de 75% dos compromissos com retorno registrado foram marcados “Sim”; caso contrário, permanece “média”. “Em parte” e “Não” entram no denominador, e retornos ainda não registrados ficam fora dele. Assim, 3 de 4 é exatamente 75% e não atende ao corte; 4 de 5 é 80% e atende ao corte se também houver pelo menos seis episódios.
+
+O painel apresenta apenas os marcos de quatro e oito episódios. Essa “confiança” é um indicador operacional criado para o roteiro, não uma probabilidade de acerto, medida estatística nem garantia de validade.
+
+Para carga, se pelo menos dois dos últimos três check-ins nominais disponíveis da liderança forem “Cansado” ou “Sobrecarregado”, o painel mostra **“Não aumentar”**. Se não houver esse sinal, mostra que é necessário conversar antes de alterar a carga; isso não autoriza assumir mais tarefas. O check-in da liderança é diferente do cuidado privado da EmpatIA.
+
+## 7. Exemplo fictício: Ana
+
+Na amostra inicial, Ana escolheu S em três dos quatro dilemas de estilo e C em um. Nas perguntas de energia, escolheu Relacionamento três vezes e Execução uma vez. A diferença entre os estilos é de dois pontos, e Relacionamento é a maior contagem única; pela tabela demonstrativa, aparece o papel **Sustentadora**.
+
+Os três últimos check-ins nominais da amostra inicial indicam cansaço ou sobrecarga, então a carga aparece como **“Não aumentar”**. Três compromissos têm retorno “Sim” e o quarto está pendente; esses dados mudam quando a demonstração é utilizada.
+
+O painel exemplifica “Infantil, na preparação de sala” como um texto fixo associado a esse papel. Não é uma indicação individual verificada: o protótipo não compara disponibilidade, competências, necessidades reais ou política de proteção. Qualquer trabalho com menores exige avaliação humana e salvaguardas próprias.
+
+## 8. O que o pastor deve e não deve concluir
+
+- Use a devolutiva para perguntar à pessoa se ela se reconhece nas observações, ouvir seu contexto e combinar próximos passos possíveis.
+- Consulte as contagens que sustentam uma frase; “3 de 4 escolhas” descreve respostas, não prova uma característica permanente.
+- Não use este protótipo para diagnosticar saúde, atribuir dons definitivos, contratar, promover, excluir alguém ou substituir uma avaliação profissional.
+- Não aumente carga automaticamente, nem interprete um papel sugerido como autorização para trabalhar com crianças ou adolescentes.
+- Os textos de devolutiva e de ministério são modelos fixos selecionados por regras. A IA opcional sugere apenas a pergunta semanal do pastor; não analisa respostas, sentimentos ou áudios e não recomenda papéis ou ministérios.
+
+## 9. Privacidade e funcionamento atual
+
+O fluxo proposto começa na EmpatIA e usa um código para liberar a conversa de liderança. Apenas a conclusão deve atravessar essa ponte, nunca as conversas ou respostas privadas de cuidado. No HTML atual, a EmpatIA e o código são simulações locais; não existe integração real ou controle de acesso.
+
+O check-in da liderança é nominal e pode aparecer na visão do pastor. A escolha feita no espaço de cuidado desta demonstração fica apenas na memória da tela e é descartada ao sair ou concluir. O gráfico de cuidado do pastor é uma amostra estática e fictícia, independente das respostas individuais.
+
+O exemplo oculta blocos com menos de cinco participantes. Esse limite, por si só, **não garante anonimato**: uma solução real precisa avaliar células pequenas, combinações de filtros e risco de reidentificação.
+
+Cadastro, respostas de liderança e conteúdo semanal do pastor ficam no armazenamento local do navegador, sem criptografia ou autenticação. O arquivo aberto diretamente e o servidor local usam armazenamentos separados; dados e rascunhos não passam automaticamente entre eles. **Use apenas dados fictícios.** A LGPD trata dados relacionados a convicção religiosa e saúde como sensíveis em determinadas circunstâncias; antes de uso real, é necessária revisão jurídica, base legal adequada, transparência, segurança e mecanismos para os direitos dos titulares.
+
+Para levar a configuração entre os dois endereços, use **Baixar semanas** e depois **Importar semanas** em Episódios. O arquivo inclui títulos, links, conteúdos e perguntas do pastor, inclusive alterações ainda não salvas, mas não inclui cadastro, respostas, check-ins ou escolhas de cuidado. Após importar, revise e salve; guarde ou apague o arquivo baixado conforme necessário.
+
+## 10. Antes de um piloto real
+
+- Revisar perguntas e linguagem com a Doxa e profissionais qualificados, preservando a dignidade e a autonomia das pessoas.
+- Definir o propósito, avaliar vieses, confiabilidade e validade no público e contexto de uso, e documentar limitações.
+- Se houver comparação com instrumentos oficiais, obter acesso legítimo e consentimento, definir o protocolo com especialistas e não tratar uma pequena amostra como prova de validade.
+- O objetivo preliminar de concordância em 7 de 10 participantes citado no material de origem é uma proposta inicial de piloto, não um resultado observado nem evidência suficiente de validade.
+- Implementar autenticação, permissões, armazenamento seguro, retenção e exclusão, avaliação da LGPD e uma política de proteção de crianças e adolescentes.
+
+## 11. Sugestões semanais com IA
+
+Em **Demo pastor → Episódios**, abra uma semana e escreva o tema ou um resumo da mensagem no campo de conteúdo. Os dois dilemas fixos aparecem logo acima. Depois de conectar o Azure OpenAI, o botão **Gerar sugestão com IA** envia o número da semana, o título, esse conteúdo e os dois enunciados ao serviço. Não são enviados automaticamente cadastro, respostas, check-ins ou cuidado privado; não inclua esses dados no conteúdo digitado.
+
+A IA propõe uma pergunta e explica sua relação editorial com os dilemas. Ela pode errar ou produzir uma pergunta que induza respostas: revise, escolha **Usar esta pergunta**, edite o campo se desejar e depois salve os episódios. A pergunta não soma pontos e não substitui os itens de estilo e energia. Episódios já iniciados mantêm a pergunta capturada ao começar.
+
+Abrir o HTML diretamente permite editar as perguntas, mas não conecta a IA. Para gerar, use o servidor local incluído no pacote. Ele não grava a chave em arquivo ou no navegador; ela permanece na memória do processo enquanto ele estiver aberto. O conteúdo enviado ao Azure fica sujeito às configurações e políticas do recurso utilizado.
+
+## 12. Como verificar e conectar o Azure
+
+- Acesse [Microsoft Foundry](https://ai.azure.com/) e procure um projeto ou recurso Azure OpenAI e um modelo já implantado. Caso não veja nenhum, consulte o administrador da assinatura; acesso ao portal, permissões e cobrança dependem da organização.
+- Para esta demonstração, você precisa do endpoint HTTPS do recurso Azure OpenAI, do nome da implantação de um modelo compatível com Chat Completions e modo JSON e de uma chave de API. O endpoint deve ser o do recurso, não o endereço de um projeto. Não compartilhe a chave nesta conversa.
+- Extraia o pacote e abra **FlorescerServidor.exe**. Na janela local, informe endpoint, implantação e chave; a chave não é exibida. Pressione Enter no primeiro campo para iniciar sem IA. O navegador abrirá o endereço local mostrado na janela.
+- Em Episódios, informe um tema fictício, gere e revise a sugestão. Cada chamada pode gerar custos no recurso Azure. Se o servidor indicar erro de autenticação ou implantação, confirme os dados com o administrador.
+- Esta ponte local aceita chave de API, não autenticação Microsoft Entra ID. Se a organização desabilita chaves, é necessário implementar outra forma de autenticação aprovada; não altere a política da organização para usar esta demo.
+- O servidor escuta apenas neste computador, mas não possui autenticação de usuários e não é adequado para produção. Feche a janela do servidor ao terminar.
+
+## Referências
+
+- [1] [Everything DiSC / Wiley — história do modelo e dos instrumentos](https://www.everythingdisc.com/our-story/)
+- [2] [Everything DiSC / Wiley — estilos contemporâneos](https://www.everythingdisc.com/what-is-disc/)
+- [3] [Gallup — os quatro domínios de CliftonStrengths](https://www.gallup.com/cliftonstrengths/en/253736/cliftonstrengths-domains.aspx)
+- [4] [Gallup — histórico e desenvolvimento de CliftonStrengths](https://www.gallup.com/cliftonstrengths/en/253754/history-cliftonstrengths.aspx)
+- [5] [Gallup — relatório técnico da avaliação oficial](https://support.gallup.com/hc/en-us/articles/43170394336787-CliftonStrengths-Technical-Report)
+- [6] [Câmara dos Deputados — texto atualizado da LGPD](https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.html)
+- [7] [Microsoft — API v1 do Azure OpenAI no Foundry](https://learn.microsoft.com/pt-br/azure/foundry/openai/api-version-lifecycle)
+- [8] [Microsoft — saída em JSON no Azure OpenAI](https://learn.microsoft.com/pt-br/azure/foundry/openai/how-to/json-mode)
+
+As referências descrevem os modelos e instrumentos de seus respectivos responsáveis. Evidências sobre instrumentos oficiais **não se transferem automaticamente** para as perguntas e regras criadas neste protótipo. Não há afiliação ou endosso dos detentores das marcas.
+</script>
+  <script>
+    "use strict";
+    const ICONS = {
+      sprout:'<path d="M12 21v-9M12 14C4 15 3 10 3 5c6 0 9 2 9 7M12 10c0-6 4-8 9-8 0 6-3 9-9 9"/>',
+      home:'<path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/>',
+      path:'<circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/>',
+      heart:'<path d="M20.5 5.5a5 5 0 0 0-7 0L12 7l-1.5-1.5a5 5 0 0 0-7 7L12 21l8.5-8.5a5 5 0 0 0 0-7z"/>',
+      flower:'<path d="M12 9c-7-10-12 1-4 3-10 5 0 12 4 4 4 8 14 1 4-4 8-2 3-13-4-3z"/><circle cx="12" cy="12" r="2"/>',
+      users:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 5"/>',
+      video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/>',
+      shield:'<path d="M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6zM8 12l3 3 5-6"/>',
+      arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+      check:'<path d="m5 12 4 4L19 6"/>',
+      clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 14v3"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 11h18M8 15h2M14 15h2"/>',
+      book:'<path d="M12 5C8 2 4 3 2 4v15c4-2 7-1 10 1 3-2 6-3 10-1V4c-2-1-6-2-10 1v15"/>',
+      download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
+      leaf:'<path d="M4 20C-2 3 13 3 21 3c0 15-7 21-17 17ZM4 20 16 8"/>',
+      play:'<path d="m9 5 11 7-11 7z"/>',
+      chat:'<path d="M21 11a9 9 0 0 1-13 8l-5 2 1-5a9 9 0 1 1 17-5Z"/><path d="M8 9h8M8 13h5"/>',
+      send:'<path d="m3 3 19 9-19 9 4-9-4-9Zm4 9h15"/>',
+      list:'<path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1"/>',
+      spark:'<path d="M12 2 14 9l7 3-7 2-2 8-2-8-7-2 7-3 2-7ZM5 3l.7 2.3L8 6l-2.3.7L5 9l-.7-2.3L2 6l2.3-.7L5 3Z"/>',
+      info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>'
+    };
+    const icon = (name, cls="") => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.sprout}</svg>`;
+    const esc = value => String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    const MINISTRIES = ["Infantil","Adolescentes","Jovens","Louvor","Som","Luz","Projeção","Comunicação","Serviço","Produção","Conexão","Líder de mesa","Atos de Justiça"];
+    const TIMES = ["Quarta","Sábado","Domingo de manhã","Domingo à noite"];
+    const MOODS = ["Muito fortalecido","Esperançoso","Em alerta","Cansado","Sobrecarregado"];
+    const ENERGY = ["Influência","Relacionamento","Execução","Estratégico"];
+    const STYLE = ["D","I","S","C"];
+    const STYLE_LABELS = {D:"Assumir e decidir",I:"Mobilizar pessoas",S:"Sustentar o ritmo",C:"Analisar e aperfeiçoar"};
+    const VALUES = ["Nenhuma","1 a 2","3 ou mais","Prefiro não dizer"];
+    const TITLES = ["Liderar com a bacia e a toalha","Ouvir antes de responder","Fidelidade nas pequenas coisas","Ninguém serve sozinho","Servir com o que você tem","Coragem para conversas honestas","Formar quem caminha ao lado","Um serviço que permanece"];
+    const REFLECTIONS = [
+      "Em que área do seu serviço você tem preferido ser servido em vez de servir?",
+      "Em qual conversa você poderia ouvir mais e responder menos?",
+      "Que pequeno cuidado faz diferença para quem serve com você?",
+      "Em que momento você precisa pedir ajuda em vez de fazer tudo?",
+      "Como você pode colocar uma habilidade sua a serviço de alguém?",
+      "Qual conversa você precisa ter com respeito e clareza?",
+      "Quem você pode acompanhar sem assumir as tarefas dessa pessoa?",
+      "Que hábito você quer manter depois desta caminhada?"
+    ];
+    // Apenas o primeiro par está no roteiro. Os demais são propostas editoriais, não itens de testes proprietários.
+    const DILEMMAS = [
+      {s:"A projeção travou 10 min antes do culto. O que você faz primeiro?",so:["Assumo e digo quem faz o quê","Acalmo o time e mantenho o clima","Sigo o plano B combinado","Descubro a causa do erro"],e:"Qual tarefa te deixaria com mais energia no domingo?",eo:["Receber quem chega pela 1ª vez","Ensinar uma turma de crianças","Montar o cronograma do culto","Pensar o culto do mês que vem"]},
+      {s:"Uma pessoa falta e a equipe precisa se reorganizar. Como você começa?",so:["Distribuo as prioridades e tomo uma decisão","Converso com o grupo e incentivo a participação","Mantenho o combinado e apoio quem está ao lado","Confiro as necessidades antes de ajustar o plano"],e:"Em uma atividade de acolhimento, o que mais te anima?",eo:["Convidar pessoas para participar","Acompanhar alguém que chegou agora","Organizar os materiais e os horários","Imaginar novas formas de acolher"]},
+      {s:"Duas pessoas discordam sobre como organizar o encontro. O que você faz primeiro?",so:["Proponho uma decisão para o grupo avançar","Ajudo as pessoas a retomar o diálogo","Preservo os acordos e escuto com calma","Comparo as alternativas com os critérios combinados"],e:"Onde você gostaria de contribuir em um projeto novo?",eo:["Apresentar a ideia e engajar a equipe","Criar vínculos entre os participantes","Transformar a ideia em tarefas concretas","Desenhar possibilidades para o futuro"]},
+      {s:"Uma atividade termina depois do previsto. Qual é seu primeiro movimento?",so:["Defino o que precisa ser resolvido agora","Animo a equipe para concluir juntos","Sigo ajudando até completar o combinado","Observo o que causou o atraso"],e:"Que contribuição te dá mais satisfação?",eo:["Comunicar uma visão que inspira","Ajudar alguém a aprender com confiança","Garantir que tudo esteja pronto no horário","Encontrar uma solução para um desafio futuro"]},
+      {s:"Você recebe uma tarefa com orientações incompletas. O que faz primeiro?",so:["Defino um caminho e começo pelo essencial","Reúno as pessoas para construir entusiasmo","Peço o combinado e ofereço apoio constante","Esclareço os detalhes e os critérios de qualidade"],e:"Qual parte de um encontro você escolheria preparar?",eo:["O convite e a apresentação para o grupo","Um momento de escuta em pequenos grupos","Os materiais e a sequência das atividades","O tema e os objetivos dos próximos encontros"]},
+      {s:"Uma mudança de última hora afeta sua equipe. Como você reage primeiro?",so:["Decido novas prioridades rapidamente","Ajudo todos a entender e abraçar a mudança","Ofereço estabilidade e apoio na transição","Verifico os riscos e os detalhes da mudança"],e:"Em que situação você sente mais energia?",eo:["Incentivar pessoas a se envolverem","Acompanhar o crescimento de alguém","Concluir uma entrega importante para o time","Conectar ideias e antecipar necessidades"]},
+      {s:"Uma pessoa está aprendendo uma tarefa que você domina. Como começa?",so:["Defino um objetivo e deixo que ela tente","Encorajo e celebro os primeiros passos","Acompanho com paciência e ritmo constante","Explico os detalhes e verifico a compreensão"],e:"O que você prefere oferecer a quem está começando?",eo:["Uma apresentação acolhedora à equipe","Tempo para conversar e aprender juntos","Um roteiro prático para executar a tarefa","Uma visão de como a tarefa se conecta ao todo"]},
+      {s:"A equipe vai avaliar o ciclo que terminou. Qual é sua primeira contribuição?",so:["Proponho decisões para o próximo ciclo","Reconheço as pessoas e incentivo a participação","Resgato os acordos que deram estabilidade","Organizo os fatos e identifico melhorias"],e:"O que te anima ao pensar no próximo ciclo?",eo:["Atrair novas pessoas para a caminhada","Fortalecer os vínculos que começaram","Colocar as melhorias em prática","Planejar novos caminhos para a equipe"]}
+    ];
+    const ROLES = {
+      Sustentador:{quote:"Você sustenta a estrutura para outros brilharem.",text:"Sua constância e seu cuidado com as pessoas ajudam a equipe a encontrar um ritmo saudável.",practice:"Compartilhe o que você precisa e combine limites claros. Ser constante não significa estar sempre disponível.",where:"Infantil · preparação de sala",how:"Apoio à liderança, sem assumir mais tarefas."},
+      Mobilizador:{quote:"Você aproxima pessoas de um propósito em comum.",text:"Sua energia para comunicar e envolver pessoas pode abrir portas para quem ainda está chegando.",practice:"Depois de inspirar, combine um próximo passo concreto e escute quem precisa de outro ritmo.",where:"Conexão · acolhimento",how:"Ao lado de alguém que ajude a organizar os próximos passos."},
+      Executor:{quote:"Você transforma intenção em movimento.",text:"Sua disposição para decidir e agir ajuda o grupo a dar passos concretos.",practice:"Antes de resolver, confira se todos entenderam o combinado e se a carga está bem distribuída.",where:"Produção · organização das entregas",how:"Com apoio para revisar detalhes e cuidar do ritmo."},
+      Guardião:{quote:"Seu cuidado com os detalhes dá segurança à equipe.",text:"Você contribui para que o serviço aconteça com qualidade e atenção ao que pode passar despercebido.",practice:"Compartilhe seus critérios e deixe espaço para outras pessoas aprenderem com você.",where:"Técnica e mídia · revisão e preparação",how:"Com alguém que ajude a comunicar prioridades."},
+      Arquiteto:{quote:"Você enxerga caminhos antes de dar o próximo passo.",text:"Planejar e conectar possibilidades pode ajudar a equipe a antecipar necessidades.",practice:"Transforme uma ideia em um pequeno experimento e escute quem vai colocá-la em prática.",where:"Produção · planejamento",how:"Em parceria com quem acompanha a execução."},
+      Formador:{quote:"Você ajuda outras pessoas a crescer e encontrar seu caminho.",text:"Cuidado com os vínculos e visão de futuro podem se encontrar na sua forma de acompanhar pessoas.",practice:"Convide alguém a aprender junto, sem assumir por essa pessoa a responsabilidade de caminhar.",where:"Discipulado · acompanhamento",how:"Sob orientação pastoral e com limites combinados."},
+      Misto:{quote:"Sua contribuição reúne diferentes formas de servir.",text:"Ainda não há uma combinação predominante nas suas respostas. Isso não diminui seu valor nem exige que você caiba em um único papel.",practice:"Observe quais atividades te dão energia e converse sobre experiências pequenas, sem aumentar a carga.",where:"A discernir em conversa",how:"Não indicar uma alocação apenas pela contagem."}
+    };
+    const KEY = "florescer-demo-v1";
+    function initialState() {
+      return {
+        version:1,registered:true,clock:28,
+        profile:{tenure:"6 meses a 2 anos",ministries:["Conexão","Líder de mesa"],availability:["Domingo à noite"],experience:"1 a 5",skills:"Organização e acolhimento",consent:true},
+        episodes:TITLES.map((title,i)=>({title,url:"",reflection:REFLECTIONS[i],context:""})),
+        answers:[0,1,2,3].map((n)=>({week:n+1,mood:[1,3,4,3][n],reflection:["Quero ouvir antes de oferecer uma solução.","Posso pedir ajuda para dividir a preparação.","Os pequenos cuidados também são uma forma de servir.","Preciso combinar limites e não assumir tudo sozinha."][n],style:n===3?3:2,energy:n===3?2:1,value:1,commitment:["Preparar a sala junto com a equipe.","Acolher uma pessoa nova no encontro.","Organizar os materiais com antecedência.","Chegar 30 min antes e ajudar a preparar a sala."][n],day:n*7,followup:n<3?{result:"Sim",text:"Consegui cumprir o combinado e dividi as tarefas.",day:(n+1)*7}:null}))
+      };
+    }
+    let state, storageIssue="";
+    function isValidState(s) {
+      if(!s || s.version!==1 || typeof s.registered!=="boolean" || !Number.isInteger(s.clock) || s.clock<0 || !Array.isArray(s.answers) || s.answers.length>8 || !Array.isArray(s.episodes) || s.episodes.length!==8) return false;
+      if(!s.profile || !Array.isArray(s.profile.ministries) || !s.profile.ministries.every(x=>MINISTRIES.includes(x)||x==="Ainda não sirvo") || !Array.isArray(s.profile.availability) || !s.profile.availability.every(x=>TIMES.includes(x))) return false;
+      if(!s.episodes.every(e=>e && typeof e.title==="string" && typeof e.url==="string" && typeof e.reflection==="string" && (!("context" in e)||(typeof e.context==="string"&&e.context.length<=3500)) && (!e.url || safeUrl(e.url)))) return false;
+      return s.answers.every((a,i)=>a && a.week===i+1 && [a.mood,a.style,a.energy,a.value].every(Number.isInteger) && a.mood>=0 && a.mood<5 && a.style>=0 && a.style<4 && a.energy>=0 && a.energy<4 && a.value>=0 && a.value<4 && typeof a.reflection==="string" && typeof a.commitment==="string" && Number.isInteger(a.day) && a.day>=0 && (!a.episode || (typeof a.episode.title==="string" && typeof a.episode.reflection==="string" && typeof a.episode.url==="string" && (!a.episode.url||safeUrl(a.episode.url)))) && (!a.followup || (["Sim","Em parte","Não"].includes(a.followup.result) && typeof a.followup.text==="string")));
+    }
+    try {
+      const saved=localStorage.getItem(KEY);
+      if(saved){const parsed=JSON.parse(saved);if(!isValidState(parsed))throw new Error("Formato de dados inválido");state=parsed;}
+      else state=initialState();
+    } catch(error) {
+      state=initialState();
+      storageIssue="Não foi possível restaurar a demonstração salva. A amostra foi carregada em memória. Você pode tentar salvar novamente ou apagar os dados locais. Detalhe: "+error.message;
+    }
+    function save() {
+      try {localStorage.setItem(KEY,JSON.stringify(state));storageIssue="";showStorageWarning();return true;}
+      catch(error){storageIssue="O navegador não permitiu salvar os dados. As alterações ficam apenas nesta aba e serão perdidas ao fechar. Detalhe: "+error.message;showStorageWarning();return false;}
+    }
+    function showStorageWarning(){const box=document.getElementById("storage-warning");box.hidden=!storageIssue;box.textContent=storageIssue;}
+    function safeUrl(value){try{const u=new URL(value);return u.protocol==="https:"&&!u.username&&!u.password;}catch{return false;}}
+    let route="home", step=0, draft={}, careMood=null, careStage=0, bridgeCode="", bridgeUsed=false;
+    let registrationStep=0, registrationDraft={}, followupDraft={}, chatTexts={}, showAllHistory=false;
+    let episodeDraft=null, pendingEpisodeImport=null, aiGeneration=Array.from({length:8},()=>null);
+    const main=document.getElementById("main");
+    const modal=document.getElementById("modal");
+    const NAV=[["care","heart","1 · EmpatIA"],["home","chat","2 · WhatsApp"],["report","flower","Minha devolutiva"],["team","users","Equipe"],["episodes","video","Episódios"],["readme","book","Leia-me"]];
+    function navigate(to,focus=true){
+      if(to==="journey")to="home";
+      route=NAV.some(n=>n[0]===to)?to:"home";
+      if(route!=="care"){careMood=null;careStage=0;}
+      render();
+      if(focus){main.focus({preventScroll:true});window.scrollTo({top:0,behavior:"instant"});}
+    }
+    function render(){
+      document.querySelectorAll("[data-icon]").forEach(el=>el.innerHTML=icon(el.dataset.icon));
+      const navMarkup=items=>items.map(([id,ic,label])=>`<button data-nav="${id}" class="${route===id?"active":""}" ${route===id?'aria-current="page"':""}>${icon(ic)}${label}</button>`).join("");
+      document.getElementById("volunteer-nav").innerHTML=navMarkup(NAV.slice(0,3));
+      document.getElementById("pastor-nav").innerHTML=navMarkup(NAV.slice(3));
+      document.getElementById("crumb").textContent=NAV.find(n=>n[0]===route)[2];
+      const isChat=route==="home"||route==="report";
+      document.body.classList.toggle("chat-mode",isChat);
+      main.classList.toggle("chat-main",isChat);
+      main.innerHTML=({home:chatView,care:careView,report:chatView,team:teamView,episodes:episodesView,readme:readmeView})[route]()+footer();
+      showStorageWarning();
+      if(route==="episodes")refreshAiStatus();
+      if(isChat)requestAnimationFrame(()=>{
+        const thread=document.getElementById("chat-thread"),active=document.getElementById("chat-active");
+        if(thread&&active)thread.scrollTop=active.offsetTop-thread.offsetTop-18;
+      });
+    }
+    const footer=()=>`<footer class="page-footer"><span>EmpatIA × Doxa · Cuidar primeiro. Depois, liderar.</span><div class="flex wrap"><button class="button ghost" data-action="about">Sobre o protótipo</button><button class="button ghost" data-action="privacy">Privacidade</button><button class="button ghost" data-action="reset">Reiniciar</button></div></footer>`;
+    function header(title,subtitle,extra=""){return `<div class="page-head"><div><h1>${title}</h1><p>${subtitle}</p></div>${extra}</div>`;}
+    function weeks(){return `<div class="journey-strip">${TITLES.map((_,i)=>`<div class="week-chip ${i<state.answers.length?"done":i===state.answers.length?"next":""}"><span class="week-dot">${i<state.answers.length?icon("check"):i+1}</span><span>Semana ${i+1}</span>${[3,7].includes(i)?'<span style="font-size:8px">Devolutiva</span>':""}</div>`).join("")}</div>`;}
+    function followupPending(){return state.answers.find(a=>!a.followup);}
+    function stats(){
+      const completed=state.answers.filter(a=>a.followup);
+      return {answered:state.answers.length,completed:completed.length,kept:completed.filter(a=>a.followup.result==="Sim").length};
+    }
+    const REGISTRATION = [
+      {field:"consent",question:"Você aceita o termo de uso dos seus dados?",options:["Aceito usar apenas dados fictícios"],caption:"Esta é uma demonstração. O cadastro e as respostas de liderança ficam neste navegador, sem autenticação. Não informe dados reais."},
+      {field:"tenure",question:"Há quanto tempo você está na Doxa?",options:["Menos de 6 meses","6 meses a 2 anos","2 a 5 anos","Mais de 5 anos"]},
+      {field:"ministries",question:"Em quais ministérios você serve hoje?",options:[...MINISTRIES,"Ainda não sirvo"],multi:true},
+      {field:"availability",question:"Quando você consegue servir?",options:TIMES,multi:true},
+      {field:"experience",question:"Você já liderou pessoas?",options:["Nunca","1 a 5","6 a 15","Mais de 15"]},
+      {field:"skills",question:"Tem alguma habilidade que gostaria de compartilhar?",kind:"text",max:180,optional:true,caption:"É opcional. Você pode escrever algo fictício, como organização ou música, ou pular por enquanto."}
+    ];
+    function episodePrompts(index,episode){
+      const d=DILEMMAS[index];
+      return [
+        {field:"mood",question:"Antes de começar: como você chega hoje?",options:MOODS,numeric:true,caption:"Este check-in é nominal e pode aparecer para o pastor. É diferente do cuidado privado da EmpatIA."},
+        {field:"video",question:"Separei o momento de reflexão desta semana para você.",video:episode,options:[episode.url?"Já assisti. Vamos continuar.":"Entendi. Continuar demonstração."],caption:episode.url?"O vídeo abre em outro site. A confirmação é sua; não rastreamos a reprodução.":"Vídeo ainda não conectado. Imagine uma reflexão sobre servir com humildade, reconhecer limites e dividir responsabilidades."},
+        {field:"reflection",question:episode.reflection,kind:"text",max:1600,caption:"Pode responder por texto aqui embaixo. Áudio e transcrição não estão disponíveis nesta demo."},
+        {field:"style",question:d.s,options:d.so,numeric:true,caption:"Não há resposta certa. Escolha o que mais se aproxima do seu primeiro impulso."},
+        {field:"energy",question:d.e,options:d.eo,numeric:true},
+        {field:"value",question:"Quantas vezes você serviu alguém sem ninguém ver?",options:VALUES,numeric:true,caption:"Esta resposta não altera a contagem de estilo ou talento."},
+        {field:"commitment",question:"Que ação você vai fazer até domingo, a partir do vídeo?",kind:"text",max:600,caption:"Uma ação pequena, concreta e possível. No roteiro, este convite chega na segunda-feira; aqui ele aparece agora para facilitar o teste."}
+      ];
+    }
+    function volunteerEpisode(episode){return {title:episode.title,url:episode.url,reflection:episode.reflection};}
+    function currentChatPrompt(){
+      if(route==="report")return {id:"report",kind:"report",question:"Sua devolutiva"};
+      if(!state.registered){
+        if(!bridgeUsed)return {id:"bridge",kind:bridgeCode?"text":"actions",max:6,question:bridgeCode?"Concluiu a etapa 1 na EmpatIA? Digite o código demonstrativo para liberar a conversa.":"Comece pela etapa 1: EmpatIA. Ao concluir o cuidado, você recebe um código para esta conversa.",caption:"No fluxo proposto, o código confirma apenas a conclusão. As respostas privadas de cuidado não passam para o bot de liderança."};
+        const q=REGISTRATION[registrationStep];
+        return {...q,id:`register-${q.field}`,kind:q.kind||(q.multi?"multi":"choice"),group:"register",back:registrationStep>0,selected:registrationDraft[q.field]};
+      }
+      if(draft.active){
+        const q=episodePrompts(state.answers.length,draft.episode||state.episodes[state.answers.length])[step];
+        return {...q,id:`week-${state.answers.length+1}-${q.field}`,kind:q.kind||"choice",group:"episode",back:step>0,selected:draft[q.field]};
+      }
+      const pending=followupPending();
+      if(pending){
+        if(state.clock<pending.day+7)return {id:`wait-${pending.week}`,kind:"wait",question:"Seu compromisso ficou combinado. Um pequeno passo já conta.",caption:`O retorno abre em 7 dias. Faltam ${pending.day+7-state.clock} dias no relógio simulado; nenhuma mensagem é enviada automaticamente.`};
+        if(followupDraft.week===pending.week&&followupDraft.result)return {id:`followup-text-${pending.week}`,kind:"text",max:1200,group:"followup",back:true,question:"O que aconteceu?",caption:"Pode contar com suas palavras. Não é uma avaliação do seu valor; é uma oportunidade de aprender com a prática."};
+        return {id:`followup-result-${pending.week}`,kind:"choice",group:"followup",question:"Você conseguiu colocar seu compromisso em prática?",options:["Sim","Em parte","Não"],caption:"Se aconteceu só em parte, tudo bem. Vamos olhar para isso juntas."};
+      }
+      if(state.answers.length===8)return {id:"complete",kind:"actions",question:"Você concluiu as 8 semanas. Que bom caminhar com você!",caption:"Sua devolutiva é um ponto de partida para uma conversa, nunca um rótulo."};
+      return {id:`start-${state.answers.length+1}`,kind:"actions",question:state.answers.length?"Obrigada por compartilhar. Vamos dar o próximo passo?":"Seu cadastro está pronto, Ana. Podemos começar nossa primeira semana?",caption:`Semana ${state.answers.length+1} de 8 · ${state.episodes[state.answers.length].title}`};
+    }
+    function richBubble(html,side="bot",draftMessage=false){
+      return `<article class="chat-bubble ${side==="out"?"out":""}" aria-label="${side==="out"?"Sua resposta":"Mensagem Doxa"}">${side==="bot"?'<div class="chat-author">DOXA</div>':""}<div>${html}</div><div class="chat-meta">${side==="out"?(draftMessage?"Rascunho nesta aba":"Resposta demonstrativa"):"Roteiro guiado"}${side==="out"?icon("check"):""}</div></article>`;
+    }
+    function bubble(text,side="bot",draftMessage=false){return richBubble(esc(text).replace(/\n/g,"<br>"),side,draftMessage);}
+    function chatVideo(episode){
+      const content=`<div class="chat-video"><div class="chat-video-art"><small>DOXA · REFLETIR PARA SERVIR</small><span class="play">${icon("play")}</span></div><div class="chat-video-info"><strong>${esc(episode.title)}</strong><small>${episode.url?"Abrir vídeo externo":"Vídeo demonstrativo · sem reprodução"}</small></div></div>`;
+      return episode.url&&safeUrl(episode.url)?`<a class="chat-video-link" href="${esc(episode.url)}" target="_blank" rel="noopener noreferrer">${content}</a>`:content;
+    }
+    function replyButton(label,action,value="",promptId=""){
+      return `<button class="chat-reply" type="button" data-action="${action}" data-value="${esc(value)}" data-prompt="${esc(promptId)}">${esc(label)}</button>`;
+    }
+    function promptButtons(q){
+      let buttons="";
+      if(q.kind==="choice"&&q.options.length<=3){
+        buttons=q.options.map((label,i)=>replyButton(label,"chat-answer",String(i),q.id)).join("");
+      }else if(q.kind==="multi"||q.kind==="choice"){
+        buttons=`<button class="chat-reply" type="button" data-action="chat-options" data-prompt="${esc(q.id)}">${icon("list")} ${q.multi?"Selecionar opções":"Ver opções"} <span class="small muted">(${q.options.length})</span></button>`;
+      }
+      if(q.id==="bridge")buttons+='<button class="chat-reply" data-nav="care">Ir para a etapa 1 · EmpatIA</button>';
+      if(q.id==="register-consent")buttons+=replyButton("Ler o termo demonstrativo","privacy");
+      if(q.optional)buttons+=replyButton("Pular por enquanto","chat-skip","",q.id);
+      if(q.kind==="wait")buttons+=replyButton("Avançar 7 dias (demo)","advance");
+      if(q.id.startsWith("start-"))buttons+=replyButton(`Começar semana ${state.answers.length+1}`,"start-episode");
+      if(q.id==="complete"||(q.kind==="wait"&&[4,8].includes(state.answers.length)))buttons+='<button class="chat-reply" data-nav="report">Ler minha devolutiva</button>';
+      return buttons?`<div class="chat-buttons">${buttons}</div>`:"";
+    }
+    function answerLabel(q,value){
+      if(q.field==="video")return q.options[0];
+      if(q.field==="consent")return "Aceito usar apenas dados fictícios nesta demonstração.";
+      if(Array.isArray(value))return value.join(" · ");
+      if(q.numeric)return q.options[value];
+      return value||"Prefiro pular por enquanto.";
+    }
+    function episodeMessages(answer,limit=7,isDraft=false){
+      const index=isDraft?state.answers.length:answer.week-1;
+      const ep=answer.episode||state.episodes[index],prompts=episodePrompts(index,ep);
+      let html=`<div class="chat-day">Semana ${index+1} · ${esc(ep.title)}</div>`;
+      for(let i=0;i<limit;i++){
+        const q=prompts[i];
+        html+=q.video?richBubble(chatVideo(ep)):bubble(q.question);
+        html+=bubble(answerLabel(q,answer[q.field]),"out",isDraft);
+      }
+      if(answer.followup)html+=`<div class="chat-day">Retorno · 7 dias depois ou mais · tempo simulado</div>`+bubble("Você conseguiu?")+bubble(answer.followup.result,"out")+bubble("O que aconteceu?")+bubble(answer.followup.text,"out");
+      return html;
+    }
+    function chatHistory(){
+      let html=bubble("Oi, Ana! Que bom ter você aqui. Vamos descobrir seu jeito de servir, uma conversa de cada vez.");
+      if(!state.registered){
+        if(bridgeUsed)html+=bubble("Recebi apenas a confirmação da sua pausa. Agora são cinco perguntas de cadastro e uma opcional. Podemos ir no seu tempo.");
+        for(let i=0;i<registrationStep;i++)html+=bubble(REGISTRATION[i].question)+bubble(answerLabel(REGISTRATION[i],registrationDraft[REGISTRATION[i].field]),"out",true);
+        return html;
+      }
+      if(state.answers.length)html+=`<button class="chat-history-button" data-action="chat-history">${showAllHistory?"Mostrar apenas a última semana":"Ver cadastro e mensagens anteriores"}</button>`;
+      if(!state.answers.length||showAllHistory){
+        html+='<div class="chat-day">Cadastro concluído · demonstração</div>';
+        REGISTRATION.forEach(q=>{html+=bubble(q.question)+bubble(answerLabel(q,state.profile[q.field]),"out");});
+      }
+      const records=showAllHistory?state.answers:state.answers.slice(-1);
+      html+=records.map(a=>episodeMessages(a)).join("");
+      if(draft.active)html+=episodeMessages(draft,step,true);
+      const pending=followupPending();
+      if(pending&&state.clock>=pending.day+7){
+        html+=`<div class="chat-day">Retomando o combinado · semana ${pending.week}</div>`+bubble("Há pelo menos sete dias simulados, você combinou:")+bubble(pending.commitment,"out");
+        if(followupDraft.week===pending.week&&followupDraft.result)html+=bubble("Você conseguiu?")+bubble(followupDraft.result,"out",true);
+      }
+      return html;
+    }
+    function reportMessages(){
+      const n=state.answers.length>=8?8:4,answers=state.answers.slice(0,n),a=analyze(answers);
+      if(!a.enough)return bubble(`Ana, seu jeito de contribuir merece tempo para aparecer. Você concluiu ${state.answers.length} episódios; a primeira devolutiva chega após 4.`)+richBubble(`Ainda não atribuímos um perfil.<div class="chat-buttons"><button class="chat-reply" data-nav="home">Voltar à conversa</button></div>`);
+      const r=ROLES[a.role],display=a.role==="Sustentador"?"Sustentadora":a.role==="Misto"?"Um jeito plural de servir":a.role;
+      return `<div class="chat-day">Sua devolutiva · marco de ${n} episódios</div>`+bubble("Ana, alguns sinais do seu jeito de contribuir começaram a aparecer. Quero compartilhar esse olhar com você.")+
+        richBubble(`<span class="eyebrow" style="color:#658770">${esc(display)}</span><p class="quote">“${esc(r.quote)}”</p><p>${esc(r.text)}</p>`)+
+        richBubble(`<strong>O que observamos nas suas escolhas</strong>${personalEvidence(a,answers)}`)+
+        bubble("Um convite para continuar crescendo:\n\n"+r.practice)+
+        richBubble(`Você é mais do que um perfil. Leve suas percepções para uma conversa com alguém que caminha ao seu lado.<span class="chat-caption">Texto demonstrativo selecionado por regras, sem IA. Não é uma avaliação psicológica.</span><div class="chat-buttons"><button class="chat-reply" data-action="download-personal">${icon("download")} Baixar minha devolutiva</button><button class="chat-reply" data-nav="home">Voltar à conversa</button></div>`);
+    }
+    function chatView(){
+      const q=currentChatPrompt(),n=state.answers.length,isText=q.kind==="text";
+      const text=chatTexts[q.id]??(q.group==="episode"?draft[q.field]:"")??"";
+      const stage=route==="report"?"Sua devolutiva":!state.registered?"Boas-vindas e cadastro":draft.active?`Semana ${n+1} · passo ${step+1} de 7`:followupPending()?`Retorno da semana ${followupPending().week}`:n===8?"Caminhada concluída":`Semana ${n+1} de 8`;
+      const hint=isText?"Digite uma resposta fictícia. Enter envia · Shift+Enter quebra a linha.":"Conversa guiada: use os botões da mensagem para continuar.";
+      const prompt=q.kind==="report"?reportMessages():`${q.back?'<button class="chat-back" data-action="chat-back">← Editar resposta anterior</button>':""}`+richBubble(`<p id="chat-question">${esc(q.question)}</p>${q.video?chatVideo(q.video):""}${q.caption?`<span class="chat-caption">${esc(q.caption)}</span>`:""}${promptButtons(q)}`);
+      return `<div class="chat-intro"><div><h1>2 · WhatsApp: liderança</h1><p>A conversa de liderança é a segunda etapa da jornada.</p></div><span class="badge green">${icon("chat")} Experiência inspirada no WhatsApp</span></div>
+      <section class="chat-shell" aria-label="Conversa demonstrativa com Doxa">
+        <aside class="chat-rail" aria-label="Etapas da jornada"><h2>Etapas</h2><button class="chat-contact secondary" data-nav="care"><span class="chat-avatar" style="background:#f0e9f4;color:#9275a9">${icon("heart")}</span><span><strong>1 · EmpatIA</strong><small>Cuidado e código de acesso</small></span></button><button class="chat-contact" data-nav="home"><span class="chat-avatar">${icon("sprout")}</span><span><strong>2 · WhatsApp</strong><small>Conversa de liderança</small></span></button><div class="chat-rail-progress"><h3>Sua caminhada</h3><div class="segments">${Array.from({length:8},(_,i)=>`<span class="${i<n?"done":i===n?"current":""}"></span>`).join("")}</div><p>${n} de 8 episódios concluídos.<br>Devolutivas nas semanas 4 e 8.</p><button class="button ghost space-sm" data-action="chat-progress">Ver meu progresso ${icon("arrow")}</button>${n>=4?'<button class="button ghost space-sm" data-nav="report">Minha devolutiva está pronta</button>':""}</div><div class="chat-rail-note">${icon("leaf")}Antes de perguntar onde você serve, queremos caminhar com você.<br><br>Dados fictícios. Esta conversa é sem IA, sem conexão com WhatsApp e sem envio de mensagens.</div></aside>
+        <div class="chat-pane">
+          <header class="chat-header"><span class="chat-avatar">${icon("sprout")}</span><div><h2>Bot de Liderança Doxa</h2><p>Etapa 2 · WhatsApp simulado</p></div><div class="chat-header-actions"><button class="chat-icon-button" data-action="chat-progress" title="Ver meu progresso" aria-label="Ver meu progresso">${icon("path")}</button><button class="chat-icon-button" data-nav="care" title="Abrir etapa 1 · EmpatIA" aria-label="Abrir etapa 1 · EmpatIA">${icon("heart")}</button><button class="chat-icon-button" data-action="chat-info" title="Sobre esta conversa" aria-label="Sobre esta conversa">${icon("info")}</button></div></header>
+          <div class="chat-thread" id="chat-thread" role="region" aria-label="Histórico da conversa" tabindex="0">
+            <div class="chat-system">Etapa 1 · EmpatIA → código → etapa 2 · WhatsApp.<br>Simulação sem conexão real. Use apenas dados fictícios. Respostas de liderança podem aparecer na visão do pastor.</div>
+            ${route==="report"?"":chatHistory()}
+            <div class="chat-day">${esc(stage)}</div><div class="chat-active" id="chat-active" tabindex="-1">${prompt}</div>
+          </div>
+          <div class="chat-compose-wrap"><form class="chat-compose" id="chat-compose" data-prompt="${esc(q.id)}"><textarea id="chat-input" name="message" rows="1" maxlength="${q.max||1600}" aria-label="${isText?esc(q.question):"Use as opções da mensagem"}" aria-describedby="chat-hint" placeholder="${isText?(q.id==="bridge"?"Digite seu código":"Escreva sua resposta fictícia…"):"Escolha uma opção na conversa…"}" ${isText?"required":"disabled"}>${isText?esc(text):""}</textarea><button class="chat-send" aria-label="Enviar resposta demonstrativa" title="Enviar resposta" ${isText?"":"disabled"}>${icon("send")}</button></form><p id="form-error" class="error" role="alert"></p><p class="chat-compose-hint" id="chat-hint">${hint}${draft.active||!state.registered?" Rascunhos só nesta aba; salvos ao concluir.":""}</p></div>
+        </div>
+      </section>`;
+    }
+    function openChatOptions(promptId){
+      const q=currentChatPrompt();
+      if(q.id!==promptId||!q.options){toast("A pergunta mudou. Use a mensagem mais recente.");return;}
+      const selected=q.multi?(q.selected||[]):[q.numeric?q.options[q.selected]:q.selected];
+      showModal("Escolha sua resposta",`<form id="chat-list-form" class="chat-list" data-prompt="${esc(q.id)}"><fieldset style="border:0;padding:0;margin:0"><legend class="field-label">${esc(q.question)}</legend><p class="multi-hint">${q.multi?"Você pode selecionar mais de uma opção.":"Selecione uma opção para enviar na conversa."}</p><div class="option-list">${q.options.map((label,i)=>`<label class="option"><input type="${q.multi?"checkbox":"radio"}" name="choice" value="${i}" ${selected.includes(label)?"checked":""} ${q.multi?"":"required"}><span>${esc(label)}</span></label>`).join("")}</div></fieldset><p id="list-error" class="error" role="alert"></p><button class="button wide" type="submit">Enviar resposta ${icon("send")}</button></form>`);
+    }
+    function chatError(message){
+      const error=modal.open?modal.querySelector("#list-error"):document.getElementById("form-error");
+      if(error)error.textContent=message;
+      else toast(message);
+    }
+    function refreshChat(){
+      render();
+      const active=document.getElementById("chat-active");
+      if(active)active.focus({preventScroll:true});
+    }
+    function respondInChat(promptId,value){
+      const q=currentChatPrompt();
+      if(q.id!==promptId){chatError("A pergunta mudou. Responda à mensagem mais recente.");return;}
+      let answer=value;
+      if(q.kind==="choice"||q.kind==="multi"){
+        const indexes=q.kind==="multi"?value:[value];
+        if(!Array.isArray(indexes)||!indexes.length||indexes.some(x=>!Number.isInteger(x)||x<0||x>=q.options.length)||new Set(indexes).size!==indexes.length){chatError("Selecione uma opção válida.");return;}
+        answer=q.kind==="multi"?indexes.map(i=>q.options[i]):q.numeric?value:q.options[value];
+        if(q.field==="ministries"&&answer.includes("Ainda não sirvo")&&answer.length>1){chatError("Escolha os ministérios ou apenas “Ainda não sirvo”.");return;}
+      }else if(q.kind==="text"){
+        answer=String(value).trim();
+        if((!answer&&!q.optional)||answer.length>q.max){chatError(`Escreva uma resposta de até ${q.max} caracteres antes de enviar.`);return;}
+      }else{chatError("Use os botões disponíveis para continuar.");return;}
+      if(q.id==="bridge"){
+        if(!bridgeCode||answer.toUpperCase()!==bridgeCode){chatError("Código inválido ou já utilizado. Conclua uma nova pausa para gerar outro.");return;}
+        bridgeCode="";bridgeUsed=true;
+      }else if(q.group==="register"){
+        registrationDraft[q.field]=q.field==="consent"?true:answer;
+        if(registrationStep<REGISTRATION.length-1)registrationStep++;
+        else{
+          state.profile={...registrationDraft};state.registered=true;save();registrationDraft={};registrationStep=0;
+        }
+      }else if(q.group==="episode"){
+        draft[q.field]=q.field==="video"?true:answer;
+        if(step<6)step++;
+        else{
+          state.answers.push({week:state.answers.length+1,mood:draft.mood,reflection:draft.reflection,style:draft.style,energy:draft.energy,value:draft.value,commitment:draft.commitment,episode:draft.episode||volunteerEpisode(state.episodes[state.answers.length]),day:state.clock,followup:null});
+          save();draft={};step=0;followupDraft={};
+        }
+      }else if(q.group==="followup"){
+        const pending=followupPending();
+        if(!pending||state.clock<pending.day+7){chatError("O retorno ainda não está disponível.");return;}
+        if(q.kind==="choice")followupDraft={week:pending.week,result:answer};
+        else{
+          if(followupDraft.week!==pending.week||!followupDraft.result){chatError("Escolha primeiro como foi seu compromisso.");return;}
+          pending.followup={result:followupDraft.result,text:answer,day:state.clock};followupDraft={};save();
+        }
+      }
+      delete chatTexts[q.id];
+      if(modal.open)modal.close();
+      refreshChat();
+    }
+    function careView(){
+      const top=header("1 · EmpatIA: cuidado","Ao concluir o cuidado, receba um código para a etapa 2: conversa de liderança.");
+      const privacy=`<div class="notice green">${icon("lock")} Suas escolhas de cuidado ficam apenas na memória desta tela e são descartadas ao sair. Não entram no perfil nem no painel do pastor.</div>`;
+      if(careStage===0)return top+`<section class="card form-card"><div class="notice purple"><strong>Como funciona:</strong> 1 · Conclua a jornada de cuidado na EmpatIA. 2 · Receba um código de uso único. 3 · Use o código para liberar a conversa de liderança no WhatsApp.<p>Este protótipo apenas simula as etapas: não há conexão real com a EmpatIA ou o WhatsApp. A amostra inicial já vem liberada; para testar o código, use <strong>Reiniciar → Começar do zero</strong>.</p></div>${privacy}<span class="eyebrow" style="color:var(--green)">CHECK-IN DE CUIDADO · SIMULAÇÃO</span><h2 class="space-sm">Como você está hoje?</h2><p class="muted small">Você não precisa explicar nem justificar. Escolha o que faz sentido agora.</p><form id="care-form"><div class="mood-grid">${MOODS.map((m,i)=>`<label class="mood"><span class="mood-face" aria-hidden="true">${["☺","☺","−","﹏","﹏"][i]}</span><span>${m}</span><input type="radio" name="careMood" value="${i}" required></label>`).join("")}</div><div class="notice purple">Este é um roteiro fixo de acolhimento, não uma conversa com IA, atendimento psicológico ou serviço de emergência. Não há chat nem análise clínica.</div><div class="form-actions"><span class="small muted">Nenhuma resposta é enviada.</span><button class="button">Fazer uma pausa ${icon("arrow")}</button></div></form></section>`;
+      if(careStage===1){
+        const texts=["Reconheça o que tem te sustentado. Você pode compartilhar esse cuidado sem assumir todas as responsabilidades.","Guarde um pouco dessa esperança para você também. Um passo pequeno pode ser suficiente por hoje.","Talvez seja hora de diminuir o ritmo e perceber o que você precisa antes do próximo compromisso.","Você pode fazer uma pausa. Cansaço não é falta de compromisso, e pedir ajuda não diminui seu valor.","Você não precisa lidar com tudo sem apoio. Se for possível, adie uma tarefa e procure alguém de confiança."];
+        return top+`<section class="card form-card">${privacy}<div class="report-flower" style="background:var(--sage);color:var(--green)">${icon("heart")}</div><h2>Vamos ficar um pouco neste momento.</h2><p class="quote">${texts[careMood]}</p><div class="evidence">${icon("leaf")} Se for confortável, faça uma pausa e perceba sua respiração, sem forçar.</div><div class="evidence">${icon("heart")} Pense em uma necessidade sua que merece atenção hoje.</div><div class="evidence">${icon("users")} Considere conversar com alguém de confiança ou buscar apoio profissional.</div><p class="small muted space">Se você estiver em perigo imediato, procure o serviço de emergência da sua região. No Brasil: SAMU 192; apoio emocional pelo CVV 188.</p><div class="form-actions"><button class="button light" data-action="care-back">Voltar</button><button class="button" data-action="finish-care">Concluir esta pausa ${icon("check")}</button></div></section>`;
+      }
+      return top+`<section class="card form-card empty"><div class="icon-tile green">${icon("check")}</div><h2>Etapa 1 concluída.</h2><p>No fluxo proposto, a EmpatIA fornece um código para liberar a conversa no WhatsApp. Ele confirma apenas a conclusão; nenhuma resposta de cuidado vai para o bot de liderança.</p><div class="notice purple">Simulação local: não há integração real. O código é de uso único e não oferece controle de acesso real. ${state.registered?"A amostra já está liberada; para testar o código, use Reiniciar → Começar do zero.":"O botão abaixo usa o código automaticamente; você também pode digitá-lo na etapa 2."}</div><div class="eyebrow muted">CÓDIGO DEMONSTRATIVO PARA A ETAPA 2</div><div style="font-size:30px;letter-spacing:7px;color:var(--purple);margin:12px 0">${esc(bridgeCode)}</div><button class="button" data-action="use-bridge">${state.registered?"Ir para a etapa 2 · WhatsApp":"Usar código e ir para a etapa 2"} ${icon("arrow")}</button><p class="small muted">O código expira quando a página é recarregada ou após o uso.</p></section>`;
+    }
+    // A pontuação usa regras, não as sugestões da IA.
+    function analyze(answers){
+      const style=Object.fromEntries(STYLE.map(x=>[x,0])),energy=Object.fromEntries(ENERGY.map(x=>[x,0]));
+      answers.forEach(a=>{style[STYLE[a.style]]++;energy[ENERGY[a.energy]]++;});
+      const ss=Object.entries(style).sort((a,b)=>b[1]-a[1]),ee=Object.entries(energy).sort((a,b)=>b[1]-a[1]);
+      const enough=answers.length>=4,dominant=enough&&ss[0][1]-ss[1][1]>=2?ss[0][0]:null;
+      const talent=ee[0][1]>ee[1][1]?ee[0][0]:null;
+      let role="Misto";
+      if(dominant){
+        if(["C","D"].includes(dominant)&&talent==="Estratégico")role="Arquiteto";
+        else if(dominant==="I"&&talent==="Influência")role="Mobilizador";
+        else if(dominant==="S"&&talent==="Relacionamento")role="Sustentador";
+        else if(dominant==="D"&&talent==="Execução")role="Executor";
+        else if(dominant==="C"&&talent==="Execução")role="Guardião";
+        else if(["I","S"].includes(dominant)&&energy.Relacionamento>0&&energy.Estratégico>0&&energy.Relacionamento===energy.Estratégico&&energy.Relacionamento>energy.Influência&&energy.Relacionamento>energy.Execução)role="Formador";
+      }
+      const follows=answers.filter(a=>a.followup),kept=follows.filter(a=>a.followup.result==="Sim").length;
+      const rate=follows.length?kept/follows.length:0;
+      const confidence=!enough?"Indisponível":answers.length>=6&&rate>.75?"Alta":"Média";
+      const tired=answers.slice(-3).filter(a=>a.mood>=3).length;
+      return {enough,style,energy,dominant,talent,role,confidence,kept,followups:follows.length,rate,tired,load:tired>=2?"Não aumentar":"Conversar antes de alterar"};
+    }
+    function personalEvidence(a,answers){
+      const sorted=Object.entries(a.style).sort((x,y)=>y[1]-x[1]),en=Object.entries(a.energy).sort((x,y)=>y[1]-x[1]);
+      return `<div class="evidence space-sm">${icon("check")}<span>Você escolheu caminhos ligados a “${STYLE_LABELS[sorted[0][0]].toLowerCase()}” em ${sorted[0][1]} de ${answers.length} situações.${!a.dominant?" Ainda não há um estilo predominante.":""}</span></div><div class="evidence">${icon("check")}<span>${en[0][1]} de ${answers.length} escolhas de energia se aproximaram de ${en[0][0].toLowerCase()}.${!a.talent?" Houve empate entre áreas de energia.":""}</span></div><div class="evidence">${icon("check")}<span>${a.followups?`${a.kept} de ${a.followups} compromissos acompanhados foram cumpridos.`:"Seus compromissos ainda aguardam acompanhamento."}</span></div>`;
+    }
+    function bars(entries,total){return entries.map(([name,value])=>`<div class="bar-row"><span>${esc(name)}</span><div class="bar"><i style="width:${total?value/total*100:0}%"></i></div><span>${value}/${total}</span></div>`).join("");}
+    function teamView(){
+      const n=state.answers.length>=8?8:4,a=analyze(state.answers.slice(0,n));
+      const currentLoad=analyze(state.answers);
+      return header("Pessoas no lugar certo.","Um olhar para os dons, sem perder de vista o cuidado.",`<span class="badge orange">${icon("users")} Visão pastoral simulada</span>`)+`
+      <div class="notice">Sem autenticação: a troca de área é apenas navegação de demonstração. Todos os nomes e indicadores abaixo são fictícios. Nunca use este arquivo com dados reais.</div>
+      <div class="grid three"><div class="card stat-card"><div class="icon-tile">${icon("users")}</div><div><small>Voluntários na amostra</small><strong>4 pessoas fictícias</strong></div></div><div class="card stat-card"><div class="icon-tile green">${icon("flower")}</div><div><small>Devolutivas disponíveis</small><strong>${a.enough?3:2} de 4 pessoas</strong></div></div><div class="card stat-card"><div class="icon-tile orange">${icon("heart")}</div><div><small>Conversa sobre carga</small><strong>${currentLoad.tired>=2?"2":"1"} pessoas · check-in nominal</strong></div></div></div>
+      <section class="card space"><div class="flex between wrap"><h3>Mapa da equipe</h3><span class="small muted">O bot sugere. O pastor decide.</span></div><div class="table-wrap space-sm"><table><thead><tr><th>Pessoa</th><th>Ministério atual</th><th>Papel sugerido</th><th>Carga atual</th><th>Devolutiva</th></tr></thead><tbody>
+      <tr><td><div class="flex gap8"><span class="avatar">AN</span><strong>Ana</strong></div></td><td>${esc(state.profile.ministries.join(", ")||"Não informado")}</td><td>${a.enough?(a.role==="Sustentador"?"Sustentadora":a.role==="Misto"?"Perfil misto":a.role):"Em construção"}</td><td><span class="badge ${currentLoad.tired>=2?"orange":"gray"}">${currentLoad.tired>=2?currentLoad.load:a.enough?currentLoad.load:"Aguardar e conversar"}</span></td><td><button class="inline-link" data-action="pastoral-report">${a.enough?"Ver evidências":"Ver progresso"}</button></td></tr>
+      <tr><td><div class="flex gap8"><span class="avatar">LU</span><strong>Lucas</strong></div></td><td>Produção</td><td>Executor</td><td><span class="badge gray">Conversar antes de alterar</span></td><td><span class="muted small">Exemplo estático</span></td></tr>
+      <tr><td><div class="flex gap8"><span class="avatar">MA</span><strong>Marina</strong></div></td><td>Conexão</td><td>Mobilizadora</td><td><span class="badge orange">Não aumentar</span></td><td><span class="muted small">Exemplo estático</span></td></tr>
+      <tr><td><div class="flex gap8"><span class="avatar">PE</span><strong>Pedro</strong></div></td><td>Som</td><td>Em construção</td><td><span class="badge gray">Aguardar e conversar</span></td><td><span class="muted small">2 de 8 episódios</span></td></tr>
+      </tbody></table></div></section>
+      <div class="grid two space"><section class="card care-summary"><div class="flex between"><h3>Cuidado do grupo</h3>${icon("shield")}</div><p class="muted small space-sm">Amostra independente e agregada da EmpatIA. Não é calculada a partir das pessoas da tabela nem do seu check-in de cuidado.</p><label for="care-block" class="field-label space">Bloco de ministérios</label><select id="care-block"><option value="people">Pessoas · Conexão e Líder de mesa</option><option value="tech">Técnica e mídia</option></select><div id="aggregate">${aggregateView("people")}</div><p class="small muted space">Nesta demonstração: sem cruzamento entre cuidado e perfis. Nunca identificar quem respondeu.</p></section>
+      <section class="card"><h3>Uma decisão humana, apoiada em evidências</h3><div class="evidence">${icon("shield")} Menos de 4 episódios: nenhum perfil é atribuído.</div><div class="evidence">${icon("heart")} Cansaço em 2 dos 3 últimos check-ins nominais: não aumentar a carga.</div><div class="evidence">${icon("users")} Infantil, Adolescentes e Jovens exigem política de proteção. A sugestão não autoriza alocação.</div><div class="flex wrap"><button class="button ghost space-sm" data-action="method">Conhecer as regras ${icon("arrow")}</button><button class="button ghost space-sm" data-nav="readme">Leia-me: bases e adaptação ${icon("book")}</button></div></section></div>`;
+    }
+    function aggregateView(block){
+      const sample=block==="people"?{count:9,rows:[["Fortalecidos",1],["Esperançosos",2],["Em alerta",1],["Cansados",1],["Sobrecarregados",4]]}:{count:3,rows:[]};
+      if(sample.count<5)return `<div class="notice purple space">${icon("lock")} Dados não exibidos. Este bloco não atingiu o mínimo de 5 participantes. Não mostramos estados, percentuais ou contagens pequenas.</div>`;
+      return `<div class="flex between space"><strong style="font-size:13px">Pessoas · ${sample.count} participantes fictícios</strong><span class="badge green">Grupo elegível</span></div>${bars(sample.rows,sample.count)}`;
+    }
+    const hasLocalAiServer=()=>location.protocol==="http:"&&location.hostname==="127.0.0.1";
+    function ensureEpisodeDraft(){
+      if(!episodeDraft)episodeDraft=state.episodes.map(ep=>({...ep,context:ep.context||""}));
+    }
+    function normalizeEpisodes(items){
+      if(!Array.isArray(items)||items.length!==8)return {error:"O arquivo deve conter exatamente oito semanas."};
+      const episodes=[];
+      for(let i=0;i<items.length;i++){
+        const ep=items[i];
+        if(!ep||typeof ep.title!=="string"||typeof ep.url!=="string"||typeof ep.reflection!=="string"||
+          (ep.context!==undefined&&typeof ep.context!=="string"))return {error:`A semana ${i+1} tem campos inválidos.`,index:i};
+        const value={title:ep.title.trim(),url:ep.url.trim(),reflection:ep.reflection.trim(),context:(ep.context||"").trim()};
+        if(!value.title||value.title.length>100||!value.reflection||value.reflection.length>350||value.context.length>3500||
+          value.url.length>1500||(value.url&&!safeUrl(value.url)))return {error:`Confira a semana ${i+1}: título e reflexão são obrigatórios. Respeite os limites e use links HTTPS, sem credenciais.`,index:i};
+        episodes.push(value);
+      }
+      return {episodes};
+    }
+    function episodeError(message,index){
+      const form=document.getElementById("episodes-form");
+      if(form){
+        if(Number.isInteger(index)){const week=form.querySelectorAll(".episode-edit")[index];if(week)week.open=true;}
+        showError(message);
+      }else toast(message);
+    }
+    function exportEpisodes(){
+      ensureEpisodeDraft();const result=normalizeEpisodes(episodeDraft);
+      if(result.error){episodeError(result.error,result.index);return;}
+      download("semanas-florescer.json",JSON.stringify({format:"florescer-episodios",version:1,episodes:result.episodes},null,2),"application/json;charset=utf-8",false);
+      toast("Arquivo das semanas criado. Ele não contém respostas dos colaboradores.");
+    }
+    async function stageEpisodeImport(file){
+      if(!file)return;
+      if(file.size>262144){episodeError("O arquivo das semanas é grande demais.");return;}
+      let documentText,parsed;
+      try{documentText=await file.text();parsed=JSON.parse(documentText);}catch(error){episodeError("Não foi possível ler o arquivo JSON das semanas.");return;}
+      if(route!=="episodes"){toast("Volte a Episódios para importar as semanas.");return;}
+      if(!parsed||parsed.format!=="florescer-episodios"||parsed.version!==1){episodeError("Este arquivo não é uma configuração de semanas do Florescer.");return;}
+      const result=normalizeEpisodes(parsed.episodes);
+      if(result.error){episodeError(result.error,result.index);return;}
+      pendingEpisodeImport=result.episodes;
+      showModal("Carregar as oito semanas?",`<p>O conteúdo importado substituirá o rascunho das semanas nesta tela. Você ainda precisará clicar em <strong>Salvar episódios</strong>.</p><p>Respostas e check-ins dos colaboradores não serão alterados. Sugestões de IA em andamento serão descartadas; um envio já iniciado não pode ser desfeito.</p>`,`<button class="button" data-action="confirm-episode-import">Carregar semanas</button>`);
+    }
+    function episodeSignature(episode){return JSON.stringify([episode.title.trim(),episode.context.trim()]);}
+    function aiResultMarkup(i){
+      const result=aiGeneration[i];
+      if(!result)return "";
+      if(result.status==="loading")return `<div class="notice purple" role="status">Solicitando a sugestão. Se a conexão estiver configurada, os dados desta semana serão enviados ao Azure OpenAI.</div>`;
+      if(result.status==="stale")return `<div class="notice" role="status">O tema ou o título mudou. Gere uma nova sugestão para esse conteúdo.</div>`;
+      if(result.status==="error")return `<div class="notice" role="alert">${esc(result.message)}</div>`;
+      return `<div class="notice green"><strong>Sugestão para revisar</strong><p>${esc(result.question)}</p><p><strong>Relação com os dilemas:</strong> ${esc(result.explanation)}</p><p>Esta relação é editorial, não um resultado validado de DISC ou CliftonStrengths.</p><button class="button light space-sm" type="button" data-action="apply-reflection" data-week="${i}">Usar esta pergunta</button><p class="small">Substitui o texto no campo abaixo; você ainda pode editá-lo antes de salvar.</p></div>`;
+    }
+    function paintAiResult(i){
+      const area=document.getElementById(`ai-result-${i}`),button=document.getElementById(`generate-${i}`);
+      if(area)area.innerHTML=aiResultMarkup(i);
+      if(button)button.disabled=!!aiGeneration[i]&&aiGeneration[i].status==="loading";
+    }
+    async function refreshAiStatus(){
+      const status=document.getElementById("ai-config-status");if(!status)return;
+      if(!hasLocalAiServer()){
+        status.textContent="IA não conectada nesta prévia. Para gerar, abra o aplicativo pelo servidor local e configure o Azure OpenAI.";
+        return;
+      }
+      try{
+        const response=await fetch("/api/status",{cache:"no-store"});
+        if(!response.ok)throw new Error(`HTTP ${response.status}`);
+        const result=await response.json();
+        if(typeof result.configured!=="boolean")throw new Error("Resposta inválida");
+        if(status.isConnected)status.textContent=result.configured?"Configuração carregada no servidor; a conexão será verificada ao gerar.":"Servidor aberto sem configuração de IA. Reinicie-o e informe endpoint, implantação e chave.";
+      }catch(error){
+        if(status.isConnected)status.textContent="Não foi possível verificar o servidor local. Confira se ele está em execução e abra o aplicativo pelo endereço informado.";
+      }
+    }
+    function aiError(code,status){
+      const messages={
+        AI_NOT_CONFIGURED:"O Azure OpenAI ainda não foi configurado no servidor. Reinicie o servidor e informe endpoint, implantação e chave.",
+        INVALID_REQUEST:"Confira o título e informe pelo menos 8 caracteres de contexto, sem exceder os limites dos campos.",
+        FORBIDDEN:"O servidor recusou a origem desta solicitação. Abra o endereço local informado pelo servidor.",
+        AZURE_AUTH:"O Azure recusou a autenticação ou o acesso. Confira a chave e as permissões do recurso.",
+        AZURE_NOT_FOUND:"O recurso ou a implantação não foi encontrado. Confira o endpoint e o nome do modelo implantado.",
+        AZURE_RATE_LIMIT:"O Azure atingiu o limite de solicitações. Aguarde e tente novamente.",
+        AZURE_BAD_REQUEST:"O modelo recusou o pedido. Confira se a implantação aceita Chat Completions e saída JSON.",
+        AZURE_UNAVAILABLE:"O serviço Azure está temporariamente indisponível.",
+        AZURE_NETWORK:"Não foi possível acessar o Azure. Confira a rede e o endpoint configurado.",
+        MODEL_INVALID_RESPONSE:"O modelo não retornou uma sugestão no formato esperado. Tente novamente.",
+        MODEL_INCOMPLETE:"A resposta do modelo veio incompleta. Tente novamente.",
+        MODEL_REFUSED:"O modelo não pôde gerar uma sugestão para esse conteúdo.",
+        SERVER_ERROR:"O servidor local encontrou um erro. Confira a janela do servidor."
+      };
+      return messages[code]||`Não foi possível gerar a sugestão (HTTP ${status}). Confira a configuração do servidor.`;
+    }
+    async function generateReflection(i){
+      if(!Number.isInteger(i)||i<0||i>=DILEMMAS.length)return;
+      ensureEpisodeDraft();
+      const episode=episodeDraft[i],title=episode.title.trim(),topic=episode.context.trim();
+      if(!title||topic.length<8||topic.length>3500){
+        aiGeneration[i]={status:"error",message:"Preencha o título e escreva pelo menos 8 caracteres sobre o conteúdo desta semana."};paintAiResult(i);return;
+      }
+      if(!hasLocalAiServer()){
+        aiGeneration[i]={status:"error",message:"A IA não está disponível nesta prévia. Abra o aplicativo pelo servidor local e configure o Azure OpenAI; você ainda pode escrever a pergunta manualmente."};paintAiResult(i);return;
+      }
+      const request={status:"loading",signature:episodeSignature(episode)};
+      aiGeneration[i]=request;paintAiResult(i);
+      try{
+        const response=await fetch("/api/gerar",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({week:i+1,title,topic,styleDilemma:DILEMMAS[i].s,energyDilemma:DILEMMAS[i].e})});
+        let result;
+        try{result=await response.json();}catch(error){throw new Error("O servidor retornou uma resposta inválida.");}
+        if(!result||typeof result!=="object"||Array.isArray(result))throw new Error("O servidor retornou uma resposta inválida.");
+        if(!response.ok)throw new Error(aiError(result.error,response.status));
+        if(!result||typeof result.precisa_contexto!=="boolean"||typeof result.fundamentacao!=="string"||!result.fundamentacao.trim()||result.fundamentacao.length>700||
+          (!result.precisa_contexto&&(typeof result.pergunta!=="string"||result.pergunta.trim().length<5||result.pergunta.length>350)))throw new Error("O servidor retornou uma sugestão incompleta.");
+        if(aiGeneration[i]!==request)return;
+        const current=(episodeDraft||state.episodes)[i];
+        if(episodeSignature({...current,context:current.context||""})!==request.signature){request.status="stale";return;}
+        if(result.precisa_contexto){request.status="error";request.message=`A IA precisa de mais contexto: ${result.fundamentacao.trim()}`;return;}
+        request.status="ready";request.question=result.pergunta.trim();request.explanation=result.fundamentacao.trim();
+      }catch(error){
+        if(aiGeneration[i]!==request)return;
+        request.status="error";request.message=error instanceof TypeError?"Não foi possível acessar o servidor local. Confira se ele está em execução.":error.message;
+      }finally{
+        if(aiGeneration[i]===request){
+          paintAiResult(i);
+          if(route!=="episodes")toast(`A geração da semana ${i+1} terminou. Volte a Episódios para conferir.`);
+        }
+      }
+    }
+    function applyReflection(i){
+      const result=aiGeneration[i],field=document.getElementById(`reflection-${i}`);
+      if(!result||result.status!=="ready"||!field)return;
+      ensureEpisodeDraft();
+      if(episodeSignature(episodeDraft[i])!==result.signature){result.status="stale";paintAiResult(i);return;}
+      field.value=result.question;field.dispatchEvent(new Event("input",{bubbles:true}));
+      toast("Pergunta aplicada ao rascunho. Revise e salve os episódios.");
+    }
+    function episodesView(){
+      ensureEpisodeDraft();
+      return header("Episódios da caminhada.","Prepare cada semana e, se desejar, peça uma sugestão de reflexão à IA.")+`
+      <div class="notice purple"><strong>Geração opcional com Azure OpenAI:</strong> ao clicar em gerar, o número da semana, o título, o conteúdo informado pelo pastor e os dois dilemas são enviados ao serviço. Não inclua nomes, respostas, relatos de cuidado ou outros dados pessoais. Use apenas conteúdo fictício nesta demo.
+      <p id="ai-config-status" role="status">Verificando a configuração de IA…</p><p>As sugestões precisam de revisão pastoral. Não são instrumentos oficiais nem validam a pontuação. <button class="inline-link" type="button" data-action="ai-help">Como configurar</button></p></div>
+      <div class="notice">A primeira pergunta de reflexão e o primeiro par de dilemas vêm do roteiro; os demais são propostas editoriais. Os dilemas são fixos nesta demo. Episódios já iniciados mantêm sua pergunta original.
+      <p>O arquivo HTML e o servidor local usam armazenamentos separados. Para levar a configuração entre eles, baixe e importe as semanas; o arquivo inclui os textos do pastor, mas não respostas ou check-ins.</p>
+      <div class="flex wrap"><button class="button light" type="button" data-action="export-episodes">Baixar semanas</button><button class="button light" type="button" data-action="import-episodes">Importar semanas</button><input id="episode-import" type="file" accept=".json,application/json" hidden></div></div>
+      <section class="card"><form id="episodes-form">${episodeDraft.map((ep,i)=>`<details class="episode-edit" ${i===0?"open":""}><summary><span class="episode-heading">Semana ${i+1} · ${i===0?"Exemplo do roteiro":"Proposta editorial"}</span>${[3,7].includes(i)?'<span class="badge purple">Marco de devolutiva</span>':""}</summary>
+      <div class="grid two space-sm"><div><label for="title-${i}">Título do episódio</label><input id="title-${i}" name="title-${i}" type="text" value="${esc(ep.title)}" maxlength="100" required></div><div><label for="url-${i}">Link HTTPS do vídeo (opcional)</label><input id="url-${i}" name="url-${i}" type="url" value="${esc(ep.url)}" placeholder="https://…" maxlength="1500"></div></div>
+      <div class="episode-context"><strong>Dilemas desta semana</strong><p><strong>Estilo:</strong> ${esc(DILEMMAS[i].s)}</p><p><strong>Energia:</strong> ${esc(DILEMMAS[i].e)}</p><p class="muted">Use uma reflexão aberta, sem induzir uma alternativa. O texto não soma pontos ao perfil.</p></div>
+      <label for="context-${i}">Conteúdo ou tema para orientar a IA</label><textarea id="context-${i}" name="context-${i}" maxlength="3500" placeholder="Resuma a mensagem ou o tema da semana, sem dados pessoais.">${esc(ep.context)}</textarea>
+      <p class="field-note">A IA usa este conteúdo e os dilemas acima para sugerir uma pergunta. O campo é salvo localmente apenas ao clicar em “Salvar episódios”.</p>
+      <button class="button light" id="generate-${i}" type="button" data-action="generate-reflection" data-week="${i}" ${aiGeneration[i]&&aiGeneration[i].status==="loading"?"disabled":""}>${icon("spark")} Gerar sugestão com IA</button>
+      <div class="ai-result" id="ai-result-${i}" aria-live="polite">${aiResultMarkup(i)}</div>
+      <label for="reflection-${i}">Pergunta de reflexão que aparecerá na conversa simulada</label><textarea id="reflection-${i}" name="reflection-${i}" maxlength="350" required>${esc(ep.reflection)}</textarea><p class="field-note">Escreva ou edite livremente. “Usar esta pergunta” preenche o campo; “Salvar episódios” aplica a configuração.</p></details>`).join("")}
+      <p id="form-error" class="error" role="alert"></p><div class="form-actions"><span class="muted small">Salvo apenas neste navegador. Nenhuma mensagem é enviada automaticamente.</span><button class="button">Salvar episódios ${icon("check")}</button></div></form></section>`;
+    }
+    const readmeMarkdown=document.getElementById("pastor-readme").textContent.replace(/^\n/,"");
+    function readmeInline(text){
+      return esc(text)
+        .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>");
+    }
+    function renderReadme(markdown){
+      const lines=markdown.split(/\r?\n/),out=[];
+      let i=0,section=0;
+      while(i<lines.length){
+        const line=lines[i].trim();
+        if(!line||line.startsWith("# ")){i++;continue;}
+        if(line.startsWith("## ")){
+          out.push(`<h2 id="readme-section-${++section}">${readmeInline(line.slice(3))}</h2>`);i++;continue;
+        }
+        if(line.startsWith("> ")){
+          out.push(`<blockquote><p>${readmeInline(line.slice(2))}</p></blockquote>`);i++;continue;
+        }
+        if(line.startsWith("|")&&i+1<lines.length&&/^\|\s*:?-/.test(lines[i+1].trim())){
+          const cells=row=>row.trim().slice(1,-1).split("|").map(cell=>readmeInline(cell.trim()));
+          const headings=cells(line);i+=2;
+          const rows=[];
+          while(i<lines.length&&lines[i].trim().startsWith("|")){rows.push(cells(lines[i++]));}
+          out.push(`<div class="table-wrap" role="region" aria-label="Tabela de referência" tabindex="0"><table><thead><tr>${headings.map(cell=>`<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);continue;
+        }
+        if(line.startsWith("- ")){
+          const items=[];
+          while(i<lines.length&&lines[i].trim().startsWith("- "))items.push(`<li>${readmeInline(lines[i++].trim().slice(2))}</li>`);
+          out.push(`<ul>${items.join("")}</ul>`);continue;
+        }
+        const paragraph=[];
+        while(i<lines.length&&lines[i].trim()&&!/^(#{1,2} |> |- |\|)/.test(lines[i].trim()))paragraph.push(lines[i++].trim());
+        if(paragraph.length)out.push(`<p>${readmeInline(paragraph.join(" "))}</p>`);
+        else{out.push(`<p>${readmeInline(line)}</p>`);i++;}
+      }
+      return out.join("");
+    }
+    function readmeView(){
+      const titles=Array.from(readmeMarkdown.matchAll(/^## (.+)$/gm),match=>match[1]);
+      const links=titles.map((title,i)=>`<a href="#readme-section-${i+1}">${esc(title)}</a>`).join("");
+      return header("Leia-me do pastor","Bases de DISC e CliftonStrengths, adaptação e limites da demonstração.",`<button class="button" data-action="download-readme">${icon("download")} Baixar README</button>`)+`
+      <div class="method-layout"><aside class="card method-toc method-toc-desktop"><h2>Neste documento</h2><nav aria-label="Seções do Leia-me">${links}</nav></aside><details class="card method-toc method-toc-mobile"><summary>Navegar por seções</summary><nav aria-label="Seções do Leia-me">${links}</nav></details><article class="card method-body">${renderReadme(readmeMarkdown)}</article></div>`;
+    }
+    function showModal(title,body,actions=""){
+      modal.innerHTML=`<h2 id="modal-title">${title}</h2>${body}<div class="modal-close">${actions}<button class="button light" data-action="close-modal">Fechar</button></div>`;
+      modal.showModal();
+    }
+    function toast(text){const el=document.getElementById("toast");el.textContent=text;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.textContent="",4500);}
+    function showError(text){const el=document.getElementById("form-error");if(el){el.textContent=text;el.scrollIntoView({block:"nearest"});}}
+    function download(name,text,type="text/plain;charset=utf-8",bom=true){
+      const url=URL.createObjectURL(new Blob([bom?"\ufeff":"",text],{type}));
+      const link=document.createElement("a");link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }
+    function personalText(){
+      const n=state.answers.length>=8?8:4,a=analyze(state.answers.slice(0,n)),r=ROLES[a.role];
+      return `FLORESCER · EMPATIA × DOXA\nDevolutiva demonstrativa de Ana · ${n} episódios\nDados fictícios. Texto selecionado por regras, sem IA. Não é avaliação psicológica.\n\n${r.quote}\n\n${r.text}\n\nPara continuar crescendo\n${r.practice}\n\n${a.kept} de ${a.followups} compromissos acompanhados foram cumpridos.\n\nVocê é mais do que um perfil. Leve suas percepções para uma conversa.\n`;
+    }
+    function pastoralReport(){
+      const n=state.answers.length>=8?8:4,a=analyze(state.answers.slice(0,n));
+      if(!a.enough){showModal("Ainda é cedo para um perfil",`<p>Ana concluiu ${state.answers.length} de 4 episódios necessários para a primeira devolutiva. Não há papel, alocação ou confiança atribuídos.</p>`);return;}
+      const r=ROLES[a.role],recent=state.answers.slice(-3),tired=recent.filter(x=>x.mood>=3).length;
+      const load=tired>=2?"Não aumentar":"Conversar antes de alterar";
+      showModal("Ana · evidências para uma conversa",`<div class="notice purple">Dados fictícios · marco de ${n} episódios · confiança ${a.confidence.toLowerCase()}. Pontuação por regra; texto sem IA.</div>
+      <h3>Onde · hipótese para conversar</h3><p>${r.where}. ${r.how}</p><h3>Como · papel na equipe</h3><p>${a.role==="Misto"?"Perfil misto":a.role}. ${r.quote}</p><h3>Carga atual · ${load.toLowerCase()}</h3><p>${tired} dos ${recent.length} últimos check-ins da liderança indicam cansaço ou sobrecarga. São check-ins nominais, não dados da EmpatIA.</p>
+      <div class="notice">Nenhuma indicação autoriza aumento de carga ou atuação com menores. A decisão é pastoral e depende de conversa, disponibilidade e política de proteção. A localização sugerida é um exemplo editorial, não um mapeamento validado.</div>
+      <h3>Contagem de estilo</h3>${bars(STYLE.map(x=>[STYLE_LABELS[x],a.style[x]]),n)}<h3 class="space">Contagem de energia</h3>${bars(Object.entries(a.energy),n)}<p>Compromissos: ${a.kept} de ${a.followups} acompanhados cumpridos (${Math.round(a.rate*100)}%). ${!a.dominant?"Não há vantagem de 2 pontos entre os dois estilos mais frequentes.":""}</p><p>Consentimento da amostra: ${state.profile.consent?"aceito para dados fictícios":"não registrado"}. Ministérios e disponibilidade são contexto de conversa, não autorização automática.</p>`);
+    }
+    document.addEventListener("click",event=>{
+      const nav=event.target.closest("[data-nav]");if(nav){navigate(nav.dataset.nav);return;}
+      const target=event.target.closest("[data-action]");if(!target)return;
+      switch(target.dataset.action){
+        case "close-modal":pendingEpisodeImport=null;modal.close();break;
+        case "start-episode":if(state.registered&&state.answers.length<8&&!followupPending()&&!draft.active){draft={active:true,episode:volunteerEpisode(state.episodes[state.answers.length])};step=0;refreshChat();}break;
+        case "chat-answer":respondInChat(target.dataset.prompt,Number(target.dataset.value));break;
+        case "chat-skip":if(currentChatPrompt().optional)respondInChat(target.dataset.prompt,"");break;
+        case "chat-options":openChatOptions(target.dataset.prompt);break;
+        case "chat-back":{
+          const q=currentChatPrompt();
+          if(!q.back)break;
+          if(q.group==="episode")step--;
+          else if(q.group==="register")registrationStep--;
+          else if(q.group==="followup")followupDraft={};
+          refreshChat();break;
+        }
+        case "chat-history":{
+          const thread=document.getElementById("chat-thread"),oldHeight=thread.scrollHeight,oldTop=thread.scrollTop,expanding=!showAllHistory;
+          showAllHistory=expanding;render();
+          requestAnimationFrame(()=>{const updated=document.getElementById("chat-thread");updated.scrollTop=expanding?oldTop+updated.scrollHeight-oldHeight:0;});break;
+        }
+        case "chat-progress":{const s=stats();showModal("Sua caminhada, passo a passo",`<p>${s.answered} de 8 episódios concluídos. ${s.kept} de ${s.completed} compromissos acompanhados foram cumpridos.</p>${weeks()}<p>As devolutivas aparecem após os episódios 4 e 8. O retorno de cada compromisso é liberado depois de 7 dias no relógio simulado.</p>`);break;}
+        case "chat-info":showModal("Uma conversa demonstrativa",`<p>Esta interface é inspirada no WhatsApp, mas não está conectada a ele. Não há envio real, criptografia de ponta a ponta ou atendimento por IA.</p><p>As respostas seguem um roteiro fixo. Perguntas com mais de três alternativas abrem uma lista. Ministérios e horários permitem seleção múltipla nesta demo web.</p><p>Seu cadastro é salvo ao concluir. As respostas de cada episódio são salvas junto com o compromisso; o retorno, após o texto final. Rascunhos só ficam nesta aba e se perdem ao recarregar.</p><p>Os check-ins de liderança são nominais. As escolhas privadas da EmpatIA nunca são copiadas para esta conversa.</p><p>O histórico é reconstruído a partir das respostas da demonstração, não de mensagens recebidas no WhatsApp. Não há gravação de áudio, transcrição ou envio de anexos.</p>`,draft.active?'<button class="button danger" data-action="exit-episode">Descartar episódio em andamento</button>':"");break;
+        case "exit-episode":showModal("Sair deste episódio?",`<p>As respostas deste episódio ainda não foram salvas. Ao sair, elas serão descartadas. Os episódios já concluídos permanecem.</p>`,`<button class="button danger" data-action="confirm-exit">Descartar e sair</button>`);break;
+        case "confirm-exit":draft={};step=0;chatTexts={};modal.close();refreshChat();break;
+        case "advance":if(followupPending()&&state.clock<followupPending().day+7){state.clock+=7;save();refreshChat();toast("Relógio demonstrativo avançado em 7 dias.");}break;
+        case "care-back":careMood=null;careStage=0;render();break;
+        case "finish-care":{
+          const bytes=crypto.getRandomValues(new Uint8Array(6)),alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+          bridgeCode=Array.from(bytes,b=>alphabet[b%alphabet.length]).join("");bridgeUsed=false;careMood=null;careStage=2;render();break;
+        }
+        case "use-bridge":if(bridgeCode){bridgeCode="";bridgeUsed=true;careStage=0;careMood=null;navigate("journey");toast("Apenas a conclusão da pausa foi confirmada nesta demo.");}break;
+        case "pastoral-report":pastoralReport();break;
+        case "download-personal":if(state.answers.length>=4)download("minha-devolutiva-demo.txt",personalText());break;
+        case "download-readme":download("README-pastor.md",readmeMarkdown,"text/markdown;charset=utf-8",false);break;
+        case "open-readme":modal.close();navigate("readme");break;
+        case "generate-reflection":generateReflection(Number(target.dataset.week));break;
+        case "apply-reflection":applyReflection(Number(target.dataset.week));break;
+        case "export-episodes":exportEpisodes();break;
+        case "import-episodes":document.getElementById("episode-import").click();break;
+        case "confirm-episode-import":
+          if(pendingEpisodeImport){episodeDraft=pendingEpisodeImport;pendingEpisodeImport=null;aiGeneration=Array.from({length:8},()=>null);modal.close();render();toast("Semanas carregadas no rascunho. Revise e salve os episódios.");}
+          break;
+        case "ai-help":showModal("Como conectar a IA do pastor",`<p>1. Acesse <a href="https://ai.azure.com/" target="_blank" rel="noopener noreferrer">Microsoft Foundry</a> e verifique com o administrador se existe um recurso Azure OpenAI com um modelo de Chat Completions implantado. A geração pode ter custo.</p><p>2. Você precisará do <strong>endpoint do recurso</strong>, do <strong>nome da implantação</strong> e de uma <strong>chave de API</strong>. Não envie a chave nesta conversa. Se sua organização não permite chaves, esta demo ainda não oferece autenticação por Microsoft Entra ID.</p><p>3. No pacote do aplicativo, abra <strong>FlorescerServidor.exe</strong> e informe os dados na janela local. A chave não aparece na tela e fica somente na memória do processo. O servidor mostra o endereço para abrir no navegador.</p><p>4. Em Episódios, resuma o tema sem dados pessoais, gere a sugestão e revise antes de usá-la. O modelo pode errar ou produzir uma pergunta inadequada.</p><p><strong>Importante:</strong> o arquivo e o servidor usam armazenamentos separados. Para levar as configurações do pastor, use <strong>Baixar semanas</strong> e <strong>Importar semanas</strong>; a conversa em andamento não é transferida. O servidor é apenas uma ponte de demonstração, sem autenticação; feche sua janela ao terminar.</p><p>Consulte também <a href="https://learn.microsoft.com/pt-br/azure/foundry/openai/api-version-lifecycle" target="_blank" rel="noopener noreferrer">a documentação da Microsoft</a>. A conexão só fica ativa depois da configuração; abrir o HTML sozinho não chama a IA.</p>`);break;
+        case "method":showModal("Como a demonstração calcula",`<p>Cada escolha de estilo e energia soma um ponto à etiqueta correspondente. O cálculo não usa IA, diagnóstico nem teste psicológico oficial.</p><ul><li>Nenhum perfil antes de 4 episódios. Devolutivas nos marcos 4 e 8.</li><li>Estilo predominante: vantagem de pelo menos 2 pontos sobre o segundo. Sem vantagem, perfil misto.</li><li>Confiança média com 4–5 episódios; alta com 6–8 e mais de 75% dos compromissos acompanhados cumpridos. Caso contrário, permanece média. “Em parte” não conta como cumprido. Não é uma medida estatística.</li><li>Carga: não aumentar quando 2 dos 3 últimos check-ins nominais indicarem cansaço ou sobrecarga. Nos demais casos, conversar; nunca liberar automaticamente.</li><li>A proposta não define como resolver todos os empates de talento. Nesta demo, empate leva a perfil misto, exceto empate na liderança entre relacionamento e estratégico com estilo de acompanhar ou mobilizar, que ilustra Formador. Esta convenção precisa de validação.</li><li>Sem combinação prevista de estilo e talento, não se força um papel.</li><li>Cuidado agregado só aparece para blocos com pelo menos 5 participantes. Não há cruzamento individual; o limite de cinco, por si só, não garante anonimato.</li></ul>`,`<button class="button" data-action="open-readme">Abrir Leia-me completo</button>`);break;
+        case "about":showModal("Sobre o Florescer",`<p>Protótipo local em HTML, CSS e JavaScript, baseado em <em>Bot de Liderança Doxa — o roteiro</em> e <em>EmpatIA × Doxa — cuidar e liderar</em>.</p><p><strong>Conversa do colaborador:</strong> visual inspirado no WhatsApp, mensagens de ida e volta, respostas rápidas, listas de opções, campo de texto e devolutivas na conversa. O cadastro e os 8 episódios seguem o mesmo roteiro. A seleção múltipla de ministérios e horários é uma conveniência da demo web, não uma reprodução exata da API do WhatsApp.</p><p><strong>Funciona nesta demo:</strong> ponte por código de uso único em memória, check-in, reflexão em texto, dilemas, compromisso, retorno após avanço do relógio e devolutivas nos marcos 4 e 8. O painel pastoral e o cuidado privado permanecem separados.</p><p><strong>IA opcional do pastor:</strong> a geração de sugestões semanais exige iniciar o servidor local e configurar um recurso Azure OpenAI. A conversa, a pontuação e as devolutivas continuam baseadas em regras; a IA não recebe respostas de colaboradores automaticamente.</p><p><strong>Não está integrado:</strong> WhatsApp, EmpatIA, autenticação, vídeo fornecido pelo pastor, gravação de áudio, transcrição, banco de dados ou envio agendado. A conversa não é um bate-papo livre com IA.</p><p>O nome Florescer, o visual, os textos de acolhimento e os conteúdos ausentes nos PDFs são propostas para discussão. A amostra começa após 4 episódios. Use “Reiniciar” para experimentar desde o cadastro.</p><p>O HTML funciona offline. Quando configurada, a IA só é chamada ao solicitar uma sugestão; links de vídeo só abrem quando você escolhe acessá-los.</p>`);break;
+        case "privacy":showModal("Privacidade nesta demonstração",`<p><strong>Não use dados reais.</strong> Informações religiosas e de cuidado exigem proteção específica. Este arquivo não implementa consentimento jurídico válido para operação real nem controles de acesso.</p><p><strong>Liderança:</strong> cadastro fictício, respostas, check-ins nominais, compromissos, conteúdo do pastor e configuração de episódios são salvos no armazenamento local deste navegador, sem criptografia. Qualquer pessoa com acesso ao arquivo e a este perfil do navegador pode abrir a área do pastor.</p><p><strong>IA do pastor:</strong> ao gerar uma sugestão, são enviados ao Azure o número da semana, o título, o conteúdo informado pelo pastor e os dois dilemas. Respostas dos colaboradores, check-ins e escolhas de cuidado não são enviados automaticamente. Não inclua dados pessoais no conteúdo.</p><p><strong>Cuidado:</strong> a escolha fica só na memória da tela e é descartada ao sair ou concluir. O código em memória registra somente a conclusão da simulação; não contém respostas. O painel agregado usa uma amostra estática independente.</p><p><strong>Excluir:</strong> o botão abaixo apaga os dados deste protótipo neste endereço e limpa o estado em memória. Arquivos baixados e dados do outro endereço (arquivo ou servidor) devem ser apagados separadamente.</p><p>Uma aplicação real precisa de autenticação, separação de bases, controle de permissões, política de retenção e exclusão, revisão LGPD e proteção de menores.</p>`,`<button class="button danger" data-action="delete-data">Apagar dados locais</button>`);break;
+        case "reset":showModal("Como deseja reiniciar?",`<p>Apenas os dados desta demonstração serão substituídos. Configurações de episódios e respostas atuais serão removidas.</p>`,`<button class="button light" data-action="reset-sample">Restaurar amostra</button><button class="button" data-action="reset-empty">Começar do zero</button>`);break;
+        case "reset-sample":resetState(false);modal.close();navigate("home");toast("Amostra fictícia restaurada.");break;
+        case "reset-empty":resetState(true);modal.close();navigate("journey");toast("Demonstração reiniciada. Comece pelo cuidado.");break;
+        case "delete-data":showModal("Apagar os dados deste protótipo?",`<p>Esta ação remove respostas, cadastro e configurações salvas neste navegador. Os PDFs originais e outros arquivos não serão alterados.</p>`,`<button class="button danger" data-action="confirm-delete">Confirmar exclusão</button>`);break;
+        case "confirm-delete":
+          try{localStorage.removeItem(KEY);state=initialState();state.registered=false;state.answers=[];state.profile={ministries:[],availability:[],consent:false};state.clock=0;clearTransientState();storageIssue="";modal.close();navigate("journey");toast("Dados locais apagados. Nenhuma resposta foi mantida.");}
+          catch(error){showModal("Não foi possível apagar",`<p>O navegador bloqueou a exclusão. Apague os dados do site nas configurações do navegador. Detalhe: ${esc(error.message)}</p>`);}
+          break;
+      }
+    });
+    document.addEventListener("change",event=>{
+      if(event.target.id==="care-block")document.getElementById("aggregate").innerHTML=aggregateView(event.target.value);
+      if(event.target.id==="episode-import"){
+        const file=event.target.files[0];event.target.value="";stageEpisodeImport(file);
+      }
+      if(event.target.name==="choice"&&currentChatPrompt().field==="ministries"){
+        const inputs=Array.from(modal.querySelectorAll('input[name="choice"]')),none=inputs.find(x=>Number(x.value)===MINISTRIES.length);
+        if(event.target===none&&event.target.checked)inputs.filter(x=>x!==none).forEach(x=>x.checked=false);
+        else if(event.target.checked&&none)none.checked=false;
+      }
+    });
+    document.addEventListener("input",event=>{
+      if(event.target.id==="chat-input")chatTexts[event.target.form.dataset.prompt]=event.target.value;
+      if(event.target.form&&event.target.form.id==="episodes-form"){
+        const match=/^(title|url|reflection|context)-([0-7])$/.exec(event.target.name||"");
+        if(match){
+          const i=Number(match[2]);ensureEpisodeDraft();episodeDraft[i][match[1]]=event.target.value;
+          if((match[1]==="title"||match[1]==="context")&&aiGeneration[i]&&aiGeneration[i].status==="ready"){
+            aiGeneration[i].status="stale";paintAiResult(i);
+          }
+        }
+      }
+    });
+    document.addEventListener("invalid",event=>{
+      if(event.target.form&&event.target.form.id==="episodes-form"){
+        const week=event.target.closest("details");if(week)week.open=true;
+      }
+    },true);
+    document.addEventListener("keydown",event=>{
+      if(event.target.id==="chat-input"&&event.key==="Enter"&&!event.shiftKey&&!event.isComposing){
+        event.preventDefault();event.target.form.requestSubmit();
+      }
+    });
+    function clearTransientState(){
+      draft={};step=0;careMood=null;careStage=0;bridgeCode="";bridgeUsed=false;
+      registrationStep=0;registrationDraft={};followupDraft={};chatTexts={};showAllHistory=false;
+      episodeDraft=null;pendingEpisodeImport=null;aiGeneration=Array.from({length:8},()=>null);
+    }
+    function resetState(empty){
+      state=initialState();clearTransientState();
+      if(empty){state.registered=false;state.answers=[];state.clock=0;state.profile={ministries:[],availability:[],consent:false};}
+      save();
+    }
+    document.addEventListener("submit",event=>{
+      const form=event.target;if(!(form instanceof HTMLFormElement))return;event.preventDefault();
+      if(!form.reportValidity())return;
+      const data=new FormData(form);
+      if(form.id==="chat-compose"){
+        respondInChat(form.dataset.prompt,String(data.get("message")||""));
+      }else if(form.id==="chat-list-form"){
+        const q=currentChatPrompt(),values=data.getAll("choice").map(Number);
+        respondInChat(form.dataset.prompt,q.kind==="multi"?values:values[0]);
+      }else if(form.id==="care-form"){
+        careMood=Number(data.get("careMood"));careStage=1;render();main.focus();
+      }else if(form.id==="episodes-form"){
+        const values=state.episodes.map((_,i)=>({title:String(data.get(`title-${i}`)||""),url:String(data.get(`url-${i}`)||""),reflection:String(data.get(`reflection-${i}`)||""),context:String(data.get(`context-${i}`)||"")}));
+        const result=normalizeEpisodes(values);
+        if(result.error){episodeError(result.error,result.index);return;}
+        state.answers.forEach(answer=>{if(!answer.episode)answer.episode=volunteerEpisode(state.episodes[answer.week-1]);});
+        state.episodes=result.episodes;episodeDraft=null;const persisted=save();if(persisted)toast("Episódios salvos neste navegador.");else toast("Alterações aplicadas apenas em memória. Consulte o aviso.");
+      }
+    });
+    render();
+  </script>
+</body>
+</html>
